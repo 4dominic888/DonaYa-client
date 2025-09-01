@@ -1,6 +1,6 @@
-import 'package:dona_ya/ui/onboarding/cubits/onboarding_cubit.dart';
-import 'package:dona_ya/ui/onboarding/widgets/onboarding_dots.dart';
-import 'package:dona_ya/ui/onboarding/widgets/onboarding_page.dart';
+import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
+import 'package:dona_ya/core/onboarding/widgets/onboarding_dots.dart';
+import 'package:dona_ya/core/onboarding/widgets/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,5 +1,5 @@
 import 'package:dona_ya/themes/app_theme.dart';
-import 'package:dona_ya/ui/onboarding/onboarding_view.dart';
+import 'package:dona_ya/core/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {

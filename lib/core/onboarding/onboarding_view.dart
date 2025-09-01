@@ -1,8 +1,8 @@
 import 'package:dona_ya/themes/app_color.dart';
-import 'package:dona_ya/ui/onboarding/cubits/onboarding_cubit.dart';
-import 'package:dona_ya/ui/onboarding/widgets/onboarding_content.dart';
-import 'package:dona_ya/ui/onboarding/widgets/onboarding_header.dart';
-import 'package:dona_ya/ui/shared/flutter_flow_button.dart';
+import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
+import 'package:dona_ya/core/onboarding/widgets/onboarding_content.dart';
+import 'package:dona_ya/core/onboarding/widgets/onboarding_header.dart';
+import 'package:dona_ya/core/shared/flutter_flow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
