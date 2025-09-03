@@ -46,12 +46,6 @@ class _OnboardingContentState extends State<OnboardingContent> {
                       title: 'Shop Now, Pay Later',
                       description:
                           'Split your purchases into easy monthly payments with zero interest.',
-                      squareImage: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage('https://cdn.discordapp.com/attachments/743991659699634296/1410785243484524614/gat.png?ex=68b247a5&is=68b0f625&hm=8bedff4e5795387c8982fb961bb8a0f04ae442f4496de98fd0d37004c64af0d1&'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
                     ),
                     OnboardingPage(
                       title: 'Instant Approvals',
