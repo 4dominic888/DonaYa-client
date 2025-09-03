@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+part of '../onboarding_view.dart';
 
-class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({
-    super.key,
+class _OnboardingPage extends StatelessWidget {
+  const _OnboardingPage({
     required this.title,
     required this.description,
     this.squareImage

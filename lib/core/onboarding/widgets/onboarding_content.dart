@@ -1,17 +1,15 @@
-import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
-import 'package:dona_ya/core/onboarding/widgets/onboarding_dots.dart';
-import 'package:dona_ya/core/onboarding/widgets/onboarding_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OnboardingContent extends StatefulWidget {
-  const OnboardingContent({super.key});
+
+part of '../onboarding_view.dart';
+
+class _OnboardingContent extends StatefulWidget {
+  const _OnboardingContent();
 
   @override
-  State<OnboardingContent> createState() => _OnboardingContentState();
+  State<_OnboardingContent> createState() => _OnboardingContentState();
 }
 
-class _OnboardingContentState extends State<OnboardingContent> {
+class _OnboardingContentState extends State<_OnboardingContent> {
   late final PageController _pageController;
 
   @override
@@ -42,17 +40,17 @@ class _OnboardingContentState extends State<OnboardingContent> {
                   onPageChanged: (index) => context.read<OnboardingCubit>().setPage(index),
                   scrollDirection: Axis.horizontal,
                   children: [
-                    OnboardingPage(
+                    _OnboardingPage(
                       title: 'Shop Now, Pay Later',
                       description:
                           'Split your purchases into easy monthly payments with zero interest.',
                     ),
-                    OnboardingPage(
+                    _OnboardingPage(
                       title: 'Instant Approvals',
                       description:
                           'Get approved within seconds—no paperwork, no waiting.',
                     ),
-                    OnboardingPage(
+                    _OnboardingPage(
                       title: 'Safe & Secure Payments',
                       description:
                           'Your transactions are encrypted and protected every step of the way.',
@@ -60,7 +58,7 @@ class _OnboardingContentState extends State<OnboardingContent> {
                   ],
                 ),
               ),
-              OnboardingDots(pageController: _pageController)
+              _OnboardingDots(pageController: _pageController)
             ],
           ),
         ),

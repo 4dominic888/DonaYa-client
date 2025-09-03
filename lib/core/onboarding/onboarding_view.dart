@@ -1,12 +1,17 @@
 import 'package:dona_ya/core/authentication/authentication_routes.dart';
 import 'package:dona_ya/themes/app_color.dart';
 import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
-import 'package:dona_ya/core/onboarding/widgets/onboarding_content.dart';
-import 'package:dona_ya/core/onboarding/widgets/onboarding_header.dart';
 import 'package:dona_ya/core/shared/flutter_flow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:dona_ya/constants/app_constants.dart';
+
+part 'widgets/onboarding_content.dart';
+part 'widgets/onboarding_dots.dart';
+part 'widgets/onboarding_header.dart';
+part 'widgets/onboarding_page.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -38,10 +43,10 @@ class _OnboardingViewState extends State<OnboardingView> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      const OnboardingHeader(),
+                      const _OnboardingHeader(),
                       BlocProvider(
                         create: (context) => OnboardingCubit(),
-                        child: const OnboardingContent(),
+                        child: const _OnboardingContent(),
                       ),
                     ],
                   ),
@@ -53,10 +58,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     spacing: 8,
                     children: [
                       FFButtonWidget(
-                        onPressed: () {
-                          print('cccccc ${AuthenticationRoutes.login.path}');
-                          context.go(AuthenticationRoutes.login.path);
-                        },
+                        onPressed: () => context.go(AuthenticationRoutes.login.path),
                         text: 'Login',
                         options: FFButtonOptions(
                           width: double.infinity,

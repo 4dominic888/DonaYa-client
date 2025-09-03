@@ -1,9 +1,7 @@
-import 'package:dona_ya/themes/app_color.dart';
-import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart' as smooth_page_indicator;
+part of '../onboarding_view.dart';
 
-class OnboardingDots extends StatelessWidget {
-  const OnboardingDots({super.key, required this.pageController});
+class _OnboardingDots extends StatelessWidget {
+  const _OnboardingDots({required this.pageController});
 
   final PageController pageController;
 
@@ -13,7 +11,7 @@ class OnboardingDots extends StatelessWidget {
       alignment: AlignmentDirectional(0, 1),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
-        child: smooth_page_indicator.SmoothPageIndicator(
+        child: SmoothPageIndicator(
           controller: pageController,
           count: 3,
           axisDirection: Axis.horizontal,
@@ -25,7 +23,7 @@ class OnboardingDots extends StatelessWidget {
             );
             // safeSetState(() {});
           },
-          effect: smooth_page_indicator.SlideEffect(
+          effect: SlideEffect(
             spacing: 8,
             radius: 8,
             dotWidth: 8,

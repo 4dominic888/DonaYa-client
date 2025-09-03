@@ -1,8 +1,7 @@
-import 'package:dona_ya/constants/app_constants.dart';
-import 'package:flutter/material.dart';
+part of '../onboarding_view.dart';
 
-class OnboardingHeader extends StatelessWidget {
-  const OnboardingHeader({super.key});
+class _OnboardingHeader extends StatelessWidget {
+  const _OnboardingHeader();
 
   @override
   Widget build(BuildContext context) {
