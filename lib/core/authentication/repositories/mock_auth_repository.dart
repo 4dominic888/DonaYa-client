@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:dona_ya/core/authentication/models/credentials.dart';
 import 'package:dona_ya/core/shared/models/user.dart';
 import 'package:dona_ya/core/authentication/abstractions/repositories/authentication_repository.dart';
+import 'package:dona_ya/utils/mock.dart';
 
 class MockAuthRepository implements AuthRepository {
 
   final StreamController<AuthenticationStatus> _authStateController = StreamController<AuthenticationStatus>.broadcast();
-  final StreamController<User?> _userController = StreamController<User?>.broadcast();
   User? _currentUser;
   AuthenticationStatus _currentState = AuthenticationStatus.unauthenticated;
   
-  // Mock data storage
   final List<User> _mockUsers = [];
   String? _accessToken;
   String? _refreshToken;
@@ -40,13 +38,15 @@ class MockAuthRepository implements AuthRepository {
   Stream<AuthenticationStatus> get status => _authStateController.stream;
 
   @override
-  Stream<User?> get userChanges => _userController.stream;
-
-  @override
   AuthenticationStatus get currentState => _currentState;
 
   @override
   User? get currentUser => _currentUser;
+
+  @override
+  set currentUser(User? user) {
+    _currentUser = user;
+  }
 
   void _updateAuthState(AuthenticationStatus newState) {
     _currentState = newState;
@@ -54,19 +54,13 @@ class MockAuthRepository implements AuthRepository {
   }
 
   void _updateUser(User? user) {
-    _currentUser = user;
-    _userController.add(user);
+    currentUser = user;
   }
-
-  Future<void> _mockDelay() async {
-    await Future.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)));
-  }
-
 
   @override
   Future<AuthResult> signInWithEmailAndPassword(AuthCredentials credentials) async {
     _updateAuthState(AuthenticationStatus.loading);
-    await _mockDelay();
+    await MockUtils.fakeDelay();
 
     final user = _mockUsers.firstWhere(
       (u) => u.email == credentials.email,
@@ -102,7 +96,7 @@ class MockAuthRepository implements AuthRepository {
   @override
   Future<AuthResult> signUpWithEmailAndPassword(AuthCredentials credentials) async {
     _updateAuthState(AuthenticationStatus.loading);
-    await _mockDelay();
+    await MockUtils.fakeDelay();
 
     if (_mockUsers.any((u) => u.email == credentials.email)) {
       _updateAuthState(AuthenticationStatus.error);
@@ -133,27 +127,14 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<AuthResult> changePassword(String oldPassword, String newPassword) async {
-    await _mockDelay();
-    return AuthResult.success(user: _currentUser!);
-  }
-
-  @override
-  Future<AuthResult> deleteAccount() async {
-    await _mockDelay();
-    await signOut();
-    return AuthResult.success(user: null);
-  }
-
-  @override
   Future<bool> isAuthenticated() async {
-    await _mockDelay();
+    await MockUtils.fakeDelay();
     return _currentState == AuthenticationStatus.authenticated && _currentUser != null;
   }
 
   @override
   Future<AuthResult> resetPassword(String email) async {
-    await _mockDelay();
+    await MockUtils.fakeDelay();
 
     if (_mockUsers.any((u) => u.email == email)) {
       return AuthResult.success(
@@ -166,15 +147,9 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<AuthResult> sendEmailVerification() async {
-    await _mockDelay();
-    return AuthResult.success(user: _currentUser!);
-  }
-
-  @override
   Future<AuthResult> signInAnonymously() async {
     _updateAuthState(AuthenticationStatus.loading);
-    await _mockDelay();
+    await MockUtils.fakeDelay();
 
     final anonymousUser = User(
       id: 'anonymous_${Random().nextInt(10000)}',
@@ -192,7 +167,7 @@ class MockAuthRepository implements AuthRepository {
 
   @override
   Future<void> signOut() async {
-    await _mockDelay();
+    await MockUtils.fakeDelay();
     _accessToken = null;
     _refreshToken = null;
     _updateUser(null);
@@ -201,41 +176,13 @@ class MockAuthRepository implements AuthRepository {
 
   @override
   Future<void> signOutAllDevices() async {
-    await _mockDelay();
+    await MockUtils.fakeDelay();
     await signOut();
   }
 
   @override
-  Future<AuthResult> updateEmail(String newEmail) async {
-    await _mockDelay();
-    return AuthResult.success(user: _currentUser!);
-  }
-
-  @override
-  Future<AuthResult> updateProfile(Map<String, dynamic> profileData) async {
-    await _mockDelay();
-
-    if (_currentUser != null) {
-      final updatedUser = User(
-        id: _currentUser!.id,
-        email: profileData['email'] ?? _currentUser!.email,
-        name: profileData['name'] ?? _currentUser!.name,
-        avatarUrl: profileData['photoUrl'] ?? _currentUser!.avatarUrl,
-        metadata: profileData['metadata'] ?? _currentUser!.metadata,
-        createdAt: _currentUser!.createdAt,
-        lastLoginAt: _currentUser!.lastLoginAt,
-      );
-
-      _updateUser(updatedUser);
-      return AuthResult.success(user: updatedUser);
-    } else {
-      return AuthResult.failure('No authenticated user');
-    }
-  }
-
-  @override
   Future<AuthResult> validateSession() async {
-    await _mockDelay();
+    await MockUtils.fakeDelay();
     if (_currentUser != null && _accessToken != null) {
       return AuthResult.success(user: _currentUser!);
     }
@@ -243,9 +190,12 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<AuthResult> verifyEmail() async {
-    await _mockDelay();
-    return AuthResult.success(user: _currentUser!);
+  void dispose() {
+    _authStateController.close();
+    _currentUser = null;
+    _currentState = AuthenticationStatus.unauthenticated;
+    _accessToken = null;
+    _refreshToken = null;
+    _mockUsers.clear();
   }
-
 }
