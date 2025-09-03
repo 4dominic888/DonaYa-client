@@ -10,17 +10,14 @@ import 'bloc/login_bloc.dart';
 part 'widgets/login_header.dart';
 part 'widgets/login_field.dart';
 
-class SignInWidget extends StatefulWidget {
-  const SignInWidget({super.key});
-
-  static String routeName = 'signIn';
-  static String routePath = '/signIn';
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<SignInWidget> createState() => _SignInWidgetState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _SignInWidgetState extends State<SignInWidget> {
+class _LoginViewState extends State<LoginView> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _emailFocusNode = FocusNode();

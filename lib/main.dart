@@ -1,5 +1,5 @@
+import 'package:dona_ya/router.dart';
 import 'package:dona_ya/themes/app_theme.dart';
-import 'package:dona_ya/core/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Dona YA',
       theme: DonaYaTheme.light,
       darkTheme: DonaYaTheme.dark,
-      home: const OnboardingView(),
+      routerConfig: DonaYaRouter.router,
       debugShowCheckedModeBanner: false
     );
   }

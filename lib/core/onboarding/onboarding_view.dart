@@ -1,3 +1,4 @@
+import 'package:dona_ya/core/authentication/authentication_routes.dart';
 import 'package:dona_ya/themes/app_color.dart';
 import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
 import 'package:dona_ya/core/onboarding/widgets/onboarding_content.dart';
@@ -5,12 +6,10 @@ import 'package:dona_ya/core/onboarding/widgets/onboarding_header.dart';
 import 'package:dona_ya/core/shared/flutter_flow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
-
-  static String routeName = 'onboarding';
-  static String routePath = '/onboarding';
 
   @override
   State<OnboardingView> createState() => _OnboardingViewState();
@@ -54,8 +53,9 @@ class _OnboardingViewState extends State<OnboardingView> {
                     spacing: 8,
                     children: [
                       FFButtonWidget(
-                        onPressed: () async {
-                          // context.pushNamed(SignInWidget.routeName);
+                        onPressed: () {
+                          print('cccccc ${AuthenticationRoutes.login.path}');
+                          context.go(AuthenticationRoutes.login.path);
                         },
                         text: 'Login',
                         options: FFButtonOptions(
