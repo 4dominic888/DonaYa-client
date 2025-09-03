@@ -120,7 +120,36 @@ class DonaYaColorState extends ThemeExtension<DonaYaColorState> {
   }
 
   @override
-  DonaYaColorState lerp(ThemeExtension<DonaYaColorState>? other, double t) => throw UnimplementedError();
+  DonaYaColorState lerp(ThemeExtension<DonaYaColorState>? other, double t) {
+    if (other is! DonaYaColorState) return this;
+    return DonaYaColorState(
+      errorBorder: Color.lerp(errorBorder, other.errorBorder, t)!,
+      errorFocus: Color.lerp(errorFocus, other.errorFocus, t)!,
+      errorHover: Color.lerp(errorHover, other.errorHover, t)!,
+      errorPressed: Color.lerp(errorPressed, other.errorPressed, t)!,
+      errorSurface: Color.lerp(errorSurface, other.errorSurface, t)!,
+      infoBorder: Color.lerp(infoBorder, other.infoBorder, t)!,
+      infoFocus: Color.lerp(infoFocus, other.infoFocus, t)!,
+      infoHover: Color.lerp(infoHover, other.infoHover, t)!,
+      infoPressed: Color.lerp(infoPressed, other.infoPressed, t)!,
+      infoSurface: Color.lerp(infoSurface, other.infoSurface, t)!,
+      primaryBorder: Color.lerp(primaryBorder, other.primaryBorder, t)!,
+      primaryFocus: Color.lerp(primaryFocus, other.primaryFocus, t)!,
+      primaryHover: Color.lerp(primaryHover, other.primaryHover, t)!,
+      primaryPressed: Color.lerp(primaryPressed, other.primaryPressed, t)!,
+      primarySurface: Color.lerp(primarySurface, other.primarySurface, t)!,
+      successBorder: Color.lerp(successBorder, other.successBorder, t)!,
+      successFocus: Color.lerp(successFocus, other.successFocus, t)!,
+      successHover: Color.lerp(successHover, other.successHover, t)!,
+      successPressed: Color.lerp(successPressed, other.successPressed, t)!,
+      successSurface: Color.lerp(successSurface, other.successSurface, t)!,
+      warningBorder: Color.lerp(warningBorder, other.warningBorder, t)!,
+      warningFocus: Color.lerp(warningFocus, other.warningFocus, t)!,
+      warningHover: Color.lerp(warningHover, other.warningHover, t)!,
+      warningPressed: Color.lerp(warningPressed, other.warningPressed, t)!,
+      warningSurface: Color.lerp(warningSurface, other.warningSurface, t)!,
+    );
+  }
 }
 
 const _extraColors = DonaYaColorState(

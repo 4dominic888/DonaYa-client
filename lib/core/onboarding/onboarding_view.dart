@@ -89,9 +89,9 @@ class _OnboardingViewState extends State<OnboardingView> {
                           padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           color: Color(0x00FFFFFF),
-                          textStyle: themeContext.textTheme.titleSmall!.copyWith(
+                          textStyle: TextStyle(
                             fontFamily: 'Onest',
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: Theme.of(context).colorScheme.onPrimaryFixed,
                             fontSize: 14,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w500,
