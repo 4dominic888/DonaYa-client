@@ -25,7 +25,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     return emit.onEach(_authenticationRepository.status, onData: (status) async {
       switch (status) {
         case AuthenticationStatus.authenticated:
-          final user = await _userRepository.getCurrentUser();
+          final user = _authenticationRepository.currentUser;
           return emit(user != null ? AuthenticationState.authenticated(user) : AuthenticationState.unauthenticated());
         case AuthenticationStatus.unauthenticated:
           return emit(AuthenticationState.unauthenticated());

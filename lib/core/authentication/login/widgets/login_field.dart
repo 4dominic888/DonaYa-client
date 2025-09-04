@@ -8,14 +8,14 @@ class _LoginField extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final Widget? additionalWidget;
   final void Function(String fieldValue)? onChanged;
-  final dynamic Function()? onErrorSelectBloc;
+  final dynamic onErrorSelected;
 
   const _LoginField({
     required this.label,
     required this.description,
     required this.focusNode,
     this.padding,
-    this.onErrorSelectBloc,
+    this.onErrorSelected,
     this.additionalWidget,
     this.onChanged,
   });
@@ -58,7 +58,7 @@ class _LoginField extends StatelessWidget {
               autofocus: false,
               obscureText: false,
               decoration: InputDecoration(
-                errorText: onErrorSelectBloc?.call() != null ? 'invalid $label' : null,
+                errorText: onErrorSelected != null ? 'invalid $label' : null,
                 isDense: true,
                 hintText: description,
                 hintStyle: themeContext.textTheme.labelMedium!.copyWith(
