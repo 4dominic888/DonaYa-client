@@ -1,4 +1,6 @@
 import 'package:dona_ya/core/authentication/authentication_routes.dart';
+import 'package:dona_ya/core/shared/dona_ya_logo.dart';
+import 'package:dona_ya/core/shared/main_button.dart';
 import 'package:dona_ya/themes/app_color.dart';
 import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
 import 'package:dona_ya/core/shared/flutter_flow_button.dart';
@@ -6,11 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:dona_ya/constants/app_constants.dart';
 
 part 'widgets/onboarding_content.dart';
 part 'widgets/onboarding_dots.dart';
-part 'widgets/onboarding_header.dart';
 part 'widgets/onboarding_page.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -43,7 +43,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      const _OnboardingHeader(),
+                      const DonaYaLogo(size: 60),
                       BlocProvider(
                         create: (context) => OnboardingCubit(),
                         child: const _OnboardingContent(),
@@ -57,28 +57,24 @@ class _OnboardingViewState extends State<OnboardingView> {
                     mainAxisSize: MainAxisSize.max,
                     spacing: 8,
                     children: [
-                      FFButtonWidget(
+
+                      MainButton(
                         onPressed: () => context.go(AuthenticationRoutes.login.path),
                         text: 'Login',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40,
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: DonaYaColorsNeutral.n100,
-                          textStyle: themeContext.textTheme.titleSmall!.copyWith(
+                          color: themeContext.colorScheme.primary,
+                          textStyle: themeContext.textTheme.bodyMedium!.copyWith(
                             fontFamily: 'Onest',
-                            color: DonaYaColorsNeutral.n10,
-                            fontSize: 14,
-                            letterSpacing: 0.0,
+                            color: themeContext.colorScheme.onPrimary,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
-                          elevation: 0,
-                          borderSide: BorderSide(width: 0),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                        )
                       ),
-                      FFButtonWidget(
+
+                      MainButton(
                         onPressed: () async {
                           // context.pushNamed(SignUpWidget.routeName);
                         },
@@ -86,21 +82,15 @@ class _OnboardingViewState extends State<OnboardingView> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40,
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: Color(0x00FFFFFF),
-                          textStyle: TextStyle(
+                          color: themeContext.colorScheme.secondary,
+                          textStyle: themeContext.textTheme.bodyMedium!.copyWith(
                             fontFamily: 'Onest',
-                            color: Theme.of(context).colorScheme.onPrimaryFixed,
-                            fontSize: 14,
-                            letterSpacing: 0.0,
+                            color: themeContext.colorScheme.onPrimary,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
-                          elevation: 0,
-                          borderSide: BorderSide(color: DonaYaColorsNeutral.n50),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
+                        )
+                      )
                     ],
                   ),
                 ),

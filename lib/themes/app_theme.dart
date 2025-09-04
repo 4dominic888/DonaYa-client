@@ -152,7 +152,7 @@ class DonaYaColorState extends ThemeExtension<DonaYaColorState> {
   }
 }
 
-const _extraColors = DonaYaColorState(
+const _extraColorsLight = DonaYaColorState(
   primarySurface: Color(0xFFFFF5F5),
   primaryBorder: Color(0xFFFBE4E5),
   primaryHover: Color(0xFFD62828),
@@ -180,6 +180,34 @@ const _extraColors = DonaYaColorState(
   infoFocus: Color(0xFF1E90FF),
 );
 
+const _extraColorsDark = DonaYaColorState(
+  primarySurface: Color(0xFF1C1C1C),
+  primaryBorder: Color(0xFF2E2E2E),
+  primaryHover: Color(0xFFFFD54F),
+  primaryPressed: Color(0xFFE6C046),
+  primaryFocus: Color(0xFFFFE082),
+  errorSurface: Color(0xFF2C0B0E),
+  errorBorder: Color(0xFF4A1B20),
+  errorHover: Color(0xFFE57373),
+  errorPressed: Color(0xFFB71C1C),
+  errorFocus: Color(0xFFEF5350),
+  successSurface: Color(0xFF0D261A),
+  successBorder: Color(0xFF1B5E20),
+  successHover: Color(0xFF66BB6A),
+  successPressed: Color(0xFF2E7D32),
+  successFocus: Color(0xFF81C784),
+  warningSurface: Color(0xFF332B00),
+  warningBorder: Color(0xFF806000),
+  warningHover: Color(0xFFFFD54F),
+  warningPressed: Color(0xFFD48900),
+  warningFocus: Color(0xFFFFE082),
+  infoSurface: Color(0xFF0A1C2E),
+  infoBorder: Color(0xFF1565C0),
+  infoHover: Color(0xFF64B5F6),
+  infoPressed: Color(0xFF1976D2),
+  infoFocus: Color(0xFF90CAF9),
+);
+
 class DonaYaTheme {
   DonaYaTheme._();
   static final light = ThemeData(
@@ -198,7 +226,7 @@ class DonaYaTheme {
       onPrimaryContainer: DonaYaColorsLight.primaryBackground,
       onSecondaryContainer: DonaYaColorsLight.secondaryBackground,
     ),
-    extensions: [_extraColors],
+    extensions: [_extraColorsLight],
     textTheme: DonaYaTextTheme.light
   );
 
@@ -218,7 +246,7 @@ class DonaYaTheme {
       onPrimaryContainer: DonaYaColorsDark.primaryBackground,
       onSecondaryContainer: DonaYaColorsDark.secondaryBackground,
     ),
-    extensions: [_extraColors],
+    extensions: [_extraColorsDark],
     textTheme: DonaYaTextTheme.dark
   );
 }

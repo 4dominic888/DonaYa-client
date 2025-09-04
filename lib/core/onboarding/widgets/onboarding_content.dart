@@ -28,7 +28,7 @@ class _OnboardingContentState extends State<_OnboardingContent> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+        padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 15),
         child: SizedBox(
           width: double.infinity,
           child: Stack(
@@ -58,6 +58,7 @@ class _OnboardingContentState extends State<_OnboardingContent> {
                   ],
                 ),
               ),
+
               _OnboardingDots(pageController: _pageController)
             ],
           ),

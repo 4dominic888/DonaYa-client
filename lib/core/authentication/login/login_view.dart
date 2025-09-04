@@ -1,14 +1,17 @@
+import 'package:dona_ya/core/authentication/login/widgets/login_methods_card.dart';
+import 'package:dona_ya/core/authentication/login/widgets/or_separator.dart';
+import 'package:dona_ya/core/authentication/widgets/auth_prompt.dart';
+import 'package:dona_ya/core/authentication/widgets/group_form.dart';
+import 'package:dona_ya/core/shared/dona_ya_logo.dart';
+import 'package:dona_ya/core/shared/main_button.dart';
 import 'package:dona_ya/core/shared/flutter_flow_button.dart';
-import 'package:dona_ya/themes/app_color.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
-
 import 'bloc/login_bloc.dart';
 
-part 'widgets/login_header.dart';
 part 'widgets/login_field.dart';
 
 class LoginView extends StatefulWidget {
@@ -55,208 +58,117 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 20,
                 children: [
-                  ..._loginHeader(context),
+              
+                  const DonaYaLogo(),
 
-                  _LoginField(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
-                    label: 'Email',
-                    description: 'Enter your email',
-                    focusNode: _emailFocusNode,
-                    onChanged: (value) => context.read<LoginBloc>().add(LoginEmailChanged(value)),
-                    onErrorSelected: emailDisplayError,
-                  ),
-
-                  _LoginField(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    label: 'Password',
-                    description: 'Enter your password',
-                    focusNode: _passwordFocusNode,
-                    onChanged: (value) => context.read<LoginBloc>().add(LoginPasswordChanged(value)),
-                    onErrorSelected: passwordDisplayError,
-                    additionalWidget: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        // context.pushNamed(ForgotPasswordWidget.routeName);
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: themeContext.textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.normal,
-                          color: themeContext.colorScheme.onSecondary,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        // context.pushNamed(HomePageWidget.routeName);
-                      },
-                      text: 'Continue',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40,
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: DonaYaColorsNeutral.n100,
-                        textStyle: themeContext.textTheme.titleSmall!.copyWith(
-                          fontSize: 14,
-                          color: DonaYaColorsNeutral.n10,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        elevation: 0,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 40),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 1,
-                            decoration: BoxDecoration(
-                              color: DonaYaColorsNeutral.n30,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'OR',
-                          style: themeContext.textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.normal,
-                            color: themeContext.colorScheme.onSecondary,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 1,
-                            decoration: BoxDecoration(
-                              color: DonaYaColorsNeutral.n30,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    spacing: 12,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: DonaYaColorsNeutral.n30),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                              0,
-                              10,
-                              0,
-                              10,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              spacing: 10,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.google,
-                                  color: themeContext.colorScheme.onPrimary,
-                                  size: 24,
-                                ),
-                                Text(
-                                  'Google',
-                                  style: themeContext.textTheme.bodyMedium!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: DonaYaColorsNeutral.n30),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                              0,
-                              10,
-                              0,
-                              10,
-                            ),
-                            child: Row(
-                              spacing: 10,
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.apple,
-                                  color: themeContext.colorScheme.onPrimary,
-                                  size: 24,
-                                ),
-                                Text(
-                                  'Apple',
-                                  style: themeContext.textTheme.bodyMedium!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(0, -1),
+                  GroupForm(
+                    text: 'Login',
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                      child: RichText(
-                        textScaler: MediaQuery.of(context).textScaler,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Don\'t have an account? ',
-                              style: themeContext.textTheme.bodyMedium!
-                                  .copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+
+                          _LoginField(
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
+                            label: 'Email',
+                            description: 'Enter your email',
+                            focusNode: _emailFocusNode,
+                            onChanged: (value) => context.read<LoginBloc>().add(LoginEmailChanged(value)),
+                            keyboardType: TextInputType.emailAddress,
+                            onErrorSelected: emailDisplayError,
+                          ),
+                      
+                          const SizedBox(height: 20),
+                      
+                          _LoginField(
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            label: 'Password',
+                            description: 'Enter your password',
+                            focusNode: _passwordFocusNode,
+                            onChanged: (value) => context.read<LoginBloc>().add(LoginPasswordChanged(value)),
+                            onErrorSelected: passwordDisplayError,
+                            keyboardType: TextInputType.visiblePassword,
+                            isPassword: true,
+                            additionalWidget: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                // context.pushNamed(ForgotPasswordWidget.routeName);
+                              },
+                              child: Text(
+                                'Forgot Password?',
+                                style: themeContext.textTheme.bodyMedium!.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                  color: themeContext.colorScheme.onSecondary,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                            TextSpan(
-                              text: 'Sign Up ',
-                              style: themeContext.textTheme.bodyMedium!
-                                  .copyWith(
-                                    fontSize: 14,
-                                    color: themeContext.colorScheme.onPrimary,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          ),
+                      
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
+                            child: MainButton(
+                              onPressed: () async {
+                                // TODO: Implement Login
+                              },
+                              text: 'Continue',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 40,
+                              )
+                            )
+                          ),
+
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 40),
+                            child: const OrSeparator(),
+                          ),
+
+
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            spacing: 12,
+                            children: [
+                              const LoginMethodsCard(
+                                label: 'Google',
+                                iconData: FontAwesomeIcons.google,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                iconColor: Colors.white,
+                              ),
+                              const LoginMethodsCard(
+                                label: 'Facebook',
+                                iconData: FontAwesomeIcons.facebook,
+                                backgroundColor: Colors.blue,
+                                textColor: Colors.white,
+                                iconColor: Colors.white,
+                              )
+                            ],
+                          ),
+                          
+                          Align(
+                            alignment: AlignmentDirectional(0, -1),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                              child: AuthPrompt(
+                                descriptionText: 'Don\'t have an account? ',
+                                linkText: 'Sign Up',
+                                onTap: () {
+                                  // TODO: Implement SignUp
+                                },
+                              ),
                             ),
-                          ],
-                          style: themeContext.textTheme.bodyMedium,
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

@@ -23,8 +23,8 @@ class DonaYaColorsLight {
   DonaYaColorsLight._();
 
   //* Brand Colors
-  static const primary = Color(0xFFD62828);
-  static const secondary = Color(0xFFFFC107);
+  static const primary = Color(0xFFF53535);
+  static const secondary = Color(0xFFF0C808);
   static const tertiary = Color(0xFFEE8B60);
   static const alternate = Color(0xFFE0E3E7);
 
@@ -51,8 +51,8 @@ class DonaYaColorsDark {
   DonaYaColorsDark._();
 
   //* Brand Colors
-  static const primary = Color(0xFFEF5350);
-  static const secondary = Color(0xFFFFD54F);
+  static const primary = Color(0xFFFFD54F);
+  static const secondary = Color(0xFFEF5350);
   static const tertiary = Color(0xFFEE8B60);
   static const alternate = Color(0xFF262D34);
 
@@ -64,13 +64,13 @@ class DonaYaColorsDark {
 
   //* Utility Colors
   static const primaryText = Color(0xFFFFFFFF);
-  static const secondaryText = Color(0xFF95A1AC);
-  static const primaryBackground = Color(0xFF1D2428);
-  static const secondaryBackground = Color(0xFF14181B);
+  static const secondaryText = Color(0xFFCFDEEE);
+  static const primaryBackground = Color(0xFF281D21);
+  static const secondaryBackground = Color(0xFF261316);
 
   //* Semantic Colors
   static const success = Color(0xFF249689);
-  static const error = Color(0xFFFF5963);
+  static const error = Color(0xFFFF9C71);
   static const warning = Color(0xFFF9CF58);
   static const info = Color(0xFFFFFFFF);
 }

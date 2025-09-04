@@ -88,6 +88,80 @@ class FFButtonOptions {
 
   /// The elevation of the button when it is hovered.
   final double? hoverElevation;
+
+  FFButtonOptions copyWith({
+    TextAlign? textAlign,
+    TextStyle? textStyle,
+    double? elevation,
+    double? height,
+    double? width,
+    EdgeInsetsGeometry? padding,
+    Color? color,
+    Color? disabledColor,
+    Color? disabledTextColor,
+    int? maxLines,
+    Color? splashColor,
+    double? iconSize,
+    Color? iconColor,
+    EdgeInsetsGeometry? iconPadding,
+    BorderRadius? borderRadius,
+    BorderSide? borderSide,
+    Color? hoverColor,
+    BorderSide? hoverBorderSide,
+    Color? hoverTextColor,
+    double? hoverElevation
+  }) {
+    return FFButtonOptions(
+      textAlign: textAlign ?? this.textAlign,
+      textStyle: textStyle ?? this.textStyle,
+      elevation: elevation ?? this.elevation,
+      height: height ?? this.height,
+      width: width ?? this.width,
+      padding: padding ?? this.padding,
+      color: color ?? this.color,
+      disabledColor: disabledColor ?? this.disabledColor,
+      disabledTextColor: disabledTextColor ?? this.disabledTextColor,
+      maxLines: maxLines ?? this.maxLines,
+      splashColor: splashColor ?? this.splashColor,
+      iconSize: iconSize ?? this.iconSize,
+      iconColor: iconColor ?? this.iconColor,
+      iconPadding: iconPadding ?? this.iconPadding,
+      borderRadius: borderRadius ?? this.borderRadius,
+      borderSide: borderSide ?? this.borderSide,
+      hoverColor: hoverColor ?? this.hoverColor,
+      hoverBorderSide: hoverBorderSide ?? this.hoverBorderSide,
+      hoverTextColor: hoverTextColor ?? this.hoverTextColor,
+      hoverElevation: hoverElevation ?? this.hoverElevation
+    );
+  }
+
+  FFButtonOptions merge(FFButtonOptions? other) {
+    if (other == null) {
+      return this;
+    }
+    return FFButtonOptions(
+      textAlign: other.textAlign ?? textAlign,
+      textStyle: other.textStyle ?? textStyle,
+      elevation: other.elevation ?? elevation,
+      height: other.height ?? height,
+      width: other.width ?? width,
+      padding: other.padding ?? padding,
+      color: other.color ?? color,
+      disabledColor: other.disabledColor ?? disabledColor,
+      disabledTextColor: other.disabledTextColor ?? disabledTextColor,
+      maxLines: other.maxLines ?? maxLines,
+      splashColor: other.splashColor ?? splashColor,
+      iconSize: other.iconSize ?? iconSize,
+      iconColor: other.iconColor ?? iconColor,
+      iconPadding: other.iconPadding ?? iconPadding,
+      borderRadius: other.borderRadius ?? borderRadius,
+      borderSide: other.borderSide ?? borderSide,
+      hoverColor: other.hoverColor ?? hoverColor,
+      hoverBorderSide: other.hoverBorderSide ?? hoverBorderSide,
+      hoverTextColor: other.hoverTextColor ?? hoverTextColor,
+      hoverElevation: other.hoverElevation ?? hoverElevation
+    );
+  }
 }
 
 /// A customizable button widget that can display text, an icon, and a loading indicator.

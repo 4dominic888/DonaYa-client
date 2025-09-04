@@ -9,6 +9,8 @@ class _LoginField extends StatelessWidget {
   final Widget? additionalWidget;
   final void Function(String fieldValue)? onChanged;
   final dynamic onErrorSelected;
+  final TextInputType? keyboardType;
+  final bool isPassword;
 
   const _LoginField({
     required this.label,
@@ -18,6 +20,8 @@ class _LoginField extends StatelessWidget {
     this.onErrorSelected,
     this.additionalWidget,
     this.onChanged,
+    this.keyboardType,
+    this.isPassword = false,
   });
 
   @override
@@ -25,24 +29,6 @@ class _LoginField extends StatelessWidget {
     final themeContext = Theme.of(context);
     return Column(
       children: [
-        Padding(
-          padding: padding ?? const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                label,
-                style: themeContext.textTheme.bodyMedium!.copyWith(
-                  fontSize: 14,
-                  color: themeContext.colorScheme.onSecondary,
-                  fontWeight: FontWeight.w500,
-                )
-              ),
-              additionalWidget ?? const SizedBox.shrink(),
-            ],
-          ),
-        ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
           child: SizedBox(
@@ -55,11 +41,14 @@ class _LoginField extends StatelessWidget {
                 Duration(milliseconds: 100),
                 () => onChanged?.call(value),
               ),
+              keyboardType: keyboardType,
+              obscureText: isPassword,
+              obscuringCharacter: '⏺',
               autofocus: false,
-              obscureText: false,
               decoration: InputDecoration(
+                label: Text(label, style: TextStyle(color: themeContext.colorScheme.onPrimary)),
+                helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
                 errorText: onErrorSelected != null ? 'invalid $label' : null,
-                isDense: true,
                 hintText: description,
                 hintStyle: themeContext.textTheme.labelMedium!.copyWith(
                   //* neutrall600
@@ -67,37 +56,41 @@ class _LoginField extends StatelessWidget {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: DonaYaColorsNeutral.n30,
+                    color: Color(0x00000000),
                     // FlutterFlowTheme.of(context).neutral30,
                     width: 1,
                   ),
-                  borderRadius: BorderRadius.circular(8),
+                  // borderRadius: BorderRadius.circular(8),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0x00000000),
+                    color: themeContext.colorScheme.onSecondaryContainer,
                     width: 1,
                   ),
-                  borderRadius: BorderRadius.circular(8),
+                  // borderRadius: BorderRadius.circular(8),
                 ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: themeContext.colorScheme.error,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
+                errorBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: themeContext.colorScheme.error,
                     width: 1,
                   ),
-                  borderRadius: BorderRadius.circular(8),
+                  // borderRadius: BorderRadius.circular(8),
+                ),
+                focusedErrorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: themeContext.colorScheme.error,
+                    width: 1,
+                  ),
+                  // borderRadius: BorderRadius.circular(8),
                 ),
                 filled: true,
-                fillColor: Colors.transparent,
+                fillColor: HSLColor.fromColor(themeContext.colorScheme.onPrimaryContainer).withLightness(
+                  themeContext.brightness == Brightness.light ? 0.92 : 0.08,
+                ).toColor(),
               ),
-              style: themeContext.textTheme.bodyMedium,
+              style: themeContext.textTheme.bodyMedium!.copyWith(
+                color: themeContext.colorScheme.onPrimary,
+              ),
               cursorColor: themeContext.colorScheme.onPrimary
             ),
           ),
