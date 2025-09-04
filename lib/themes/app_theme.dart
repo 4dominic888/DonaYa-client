@@ -153,11 +153,11 @@ class DonaYaColorState extends ThemeExtension<DonaYaColorState> {
 }
 
 const _extraColors = DonaYaColorState(
-  primarySurface: Color(0xFFF2E6FF),
-  primaryBorder: Color(0xFFE3CFFF),
-  primaryHover: Color(0xFF7643D4),
-  primaryPressed: Color(0xFF472880),
-  primaryFocus: Color(0xFF8E51FF),
+  primarySurface: Color(0xFFFFF5F5),
+  primaryBorder: Color(0xFFFBE4E5),
+  primaryHover: Color(0xFFD62828),
+  primaryPressed: Color(0xFFB31B23),
+  primaryFocus: Color(0xFF7A0C12),
   errorSurface: Color(0xFFFFEBEE),
   errorBorder: Color(0xFFF7BDC1),
   errorHover: Color(0xFFC02F3A),
