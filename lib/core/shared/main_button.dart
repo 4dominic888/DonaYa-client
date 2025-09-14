@@ -25,7 +25,7 @@ class _MainButtonState extends State<MainButton> {
       textStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
       elevation: 0,
       borderRadius: BorderRadius.circular(8),

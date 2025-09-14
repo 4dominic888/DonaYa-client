@@ -51,7 +51,7 @@ class DonaYaColorsDark {
   DonaYaColorsDark._();
 
   //* Brand Colors
-  static const primary = Color(0xFFFFD54F);
+  static const primary = Color(0xFFC0A342);
   static const secondary = Color(0xFFEF5350);
   static const tertiary = Color(0xFFEE8B60);
   static const alternate = Color(0xFF262D34);
