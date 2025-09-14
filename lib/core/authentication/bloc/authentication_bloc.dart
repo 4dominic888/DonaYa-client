@@ -1,4 +1,4 @@
-import 'package:dona_ya/core/authentication/abstractions/repositories/authentication_repository.dart';
+import 'package:dona_ya/core/authentication/abstractions/repositories/auth_service.dart';
 import 'package:dona_ya/core/authentication/abstractions/repositories/user_repository.dart';
 import 'package:dona_ya/core/shared/models/user.dart';
 import 'package:equatable/equatable.dart';
@@ -9,23 +9,22 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
-    required AuthRepository authenticationRepository,
-    required UserRepository userRepository
-  }) : _authenticationRepository = authenticationRepository,
-       _userRepository = userRepository,
+    required AuthService authenticationService,
+    required UserRepository userRepository,
+  }) : _authService = authenticationService, _userRepository = userRepository,
   super(const AuthenticationState.unknown()) {
     on<AuthenticationSubscriptionRequested>(_onAuthenticationSubscriptionRequested);
     on<AuthenticationLogoutPressed>(_onAuthenticationLogoutPressed);
   }
 
-  final AuthRepository _authenticationRepository;
+  final AuthService _authService;
   final UserRepository _userRepository;
 
   Future<void> _onAuthenticationSubscriptionRequested(AuthenticationSubscriptionRequested event, Emitter<AuthenticationState> emit) async {
-    return emit.onEach(_authenticationRepository.status, onData: (status) async {
+    return emit.onEach(_authService.status, onData: (status) async {
       switch (status) {
         case AuthenticationStatus.authenticated:
-          final user = _authenticationRepository.currentUser;
+          final user = _userRepository.currentUser;
           return emit(user != null ? AuthenticationState.authenticated(user) : AuthenticationState.unauthenticated());
         case AuthenticationStatus.unauthenticated:
           return emit(AuthenticationState.unauthenticated());
@@ -40,5 +39,5 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   void _onAuthenticationLogoutPressed(AuthenticationLogoutPressed event, Emitter<AuthenticationState> emit) async =>
-    _authenticationRepository.signOut();
+    _authService.logout();
 }

@@ -1,25 +1,12 @@
-import 'package:dona_ya/core/authentication/abstractions/repositories/authentication_repository.dart';
-import 'package:dona_ya/core/authentication/models/credentials.dart';
+import 'package:dona_ya/core/authentication/models/user_register.dart';
 import 'package:dona_ya/core/shared/models/user.dart';
+import 'package:dona_ya/core/shared/utils/result.dart';
 
 abstract class UserRepository {
 
-  final AuthRepository authRepository;
-  UserRepository(this.authRepository);
+  User? get currentUser;
+  set currentUser(User? user);
 
-  Stream<User?> get userChanges;
-
-  Future<AuthResult> changePassword(String oldPassword, String newPassword);
-
-  Future<AuthResult> updateEmail(String newEmail);
-
-  Future<AuthResult> updateProfile(Map<String, dynamic> profileData);
-
-  Future<AuthResult> verifyEmail();
-
-  Future<AuthResult> deleteAccount();
-
-  Future<AuthResult> sendEmailVerification();
-
-  void dispose();
+  Future<Result<void, String>> save(UserRegister userRegister);
+  Future<Result<void, String>> authenticate({required final String email, required final String password});
 }

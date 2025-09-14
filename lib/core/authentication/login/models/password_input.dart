@@ -2,9 +2,9 @@ import 'package:formz/formz.dart';
 
 enum PasswordValidationError { tooShort, noUpper, noLower, noNumber, noSpecial }
 
-class Password extends FormzInput<String, PasswordValidationError> {
-  const Password.pure() : super.pure('');
-  const Password.dirty([super.value = '']) : super.dirty();
+class PasswordInput extends FormzInput<String, PasswordValidationError> {
+  const PasswordInput.pure() : super.pure('');
+  const PasswordInput.dirty([super.value = '']) : super.dirty();
 
   static final _regex = RegExp(
     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~])[A-Za-z\d!@#\$&*~]{8,}$'

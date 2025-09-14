@@ -1,8 +1,8 @@
-import 'package:dona_ya/core/authentication/abstractions/repositories/authentication_repository.dart';
+import 'package:dona_ya/core/authentication/abstractions/repositories/auth_service.dart';
 import 'package:dona_ya/core/authentication/abstractions/repositories/user_repository.dart';
 import 'package:dona_ya/core/authentication/bloc/authentication_bloc.dart';
-import 'package:dona_ya/core/authentication/repositories/mock_auth_repository.dart';
-import 'package:dona_ya/core/authentication/repositories/mock_user_repository.dart';
+import 'package:dona_ya/core/authentication/infrastructure/mock_auth_service.dart';
+import 'package:dona_ya/core/authentication/infrastructure/mock_user_repository.dart';
 import 'package:dona_ya/router.dart';
 import 'package:dona_ya/themes/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,29 +17,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final authRepository = MockAuthRepository();
+    
+    final UserRepository userRepository = MockUserRepository();
 
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<AuthRepository>(
-          create: (_) => authRepository,
-          dispose: (repo) => repo.dispose(),
+        RepositoryProvider<AuthService>(
+          create: (_) => MockAuthService(userRepository: userRepository),
+          dispose: (service) => service.dispose(),
         ),
         RepositoryProvider<UserRepository>(
-          create: (_) => MockUserRepository(authRepository: authRepository),
-          dispose: (repo) => repo.dispose(),
+          create: (_) => userRepository
         ),
       ],
       child: BlocProvider(
         lazy: false,
         create: (context) => AuthenticationBloc(
-          authenticationRepository: context.read<AuthRepository>(),
+          authenticationService: context.read<AuthService>(),
           userRepository: context.read<UserRepository>(),
         )..add(AuthenticationSubscriptionRequested()),
         child: MaterialApp.router(
           title: 'Dona YA',
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           theme: DonaYaTheme.light,
           darkTheme: DonaYaTheme.dark,
           routerConfig: DonaYaRouter.router,

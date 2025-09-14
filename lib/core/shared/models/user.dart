@@ -6,7 +6,6 @@ class User extends Equatable {
   final String email;
   final String name;
   final String? avatarUrl;
-  final Map<String, dynamic>? metadata;
   final DateTime createdAt;
   final DateTime lastLoginAt;
 
@@ -15,7 +14,6 @@ class User extends Equatable {
     required this.email,
     required this.name,
     this.avatarUrl,
-    this.metadata,
     required this.createdAt,
     required this.lastLoginAt,
   });
@@ -25,7 +23,6 @@ class User extends Equatable {
     'email': email,
     'name': name,
     'photoUrl': avatarUrl,
-    'metadata': metadata,
     'createdAt': createdAt.toIso8601String(),
     'lastLoginAt': lastLoginAt.toIso8601String(),
   };
@@ -35,7 +32,6 @@ class User extends Equatable {
     email: json['email'],
     name: json['name'],
     avatarUrl: json['photoUrl'],
-    metadata: json['metadata'],
     createdAt: DateTime.parse(json['createdAt']),
     lastLoginAt: DateTime.parse(json['lastLoginAt']),
   );
@@ -44,8 +40,8 @@ class User extends Equatable {
     String? id,
     String? email,
     String? name,
+    String? avatarUrl,
     String? photoUrl,
-    Map<String, dynamic>? metadata,
     DateTime? createdAt,
     DateTime? lastLoginAt,
   }) {
@@ -54,7 +50,6 @@ class User extends Equatable {
       email: email ?? this.email,
       name: name ?? this.name,
       avatarUrl: photoUrl ?? this.avatarUrl,
-      metadata: metadata ?? this.metadata,
       createdAt: createdAt ?? this.createdAt,
       lastLoginAt: lastLoginAt ?? this.lastLoginAt,
     );
@@ -65,7 +60,6 @@ class User extends Equatable {
     email: '',
     name: '',
     avatarUrl: '',
-    metadata: {},
     createdAt: ConstDateTime(DateTime.january, 1, 2000),
     lastLoginAt: ConstDateTime(DateTime.january, 1, 2000),
   );
