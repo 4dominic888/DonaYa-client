@@ -48,7 +48,7 @@ class _LoginField extends StatelessWidget {
               decoration: InputDecoration(
                 label: Text(label, style: TextStyle(color: themeContext.colorScheme.onPrimary)),
                 helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
-                errorText: onErrorSelected != null ? 'invalid $label' : null,
+                errorText: onErrorSelected?.message,
                 hintText: description,
                 hintStyle: themeContext.textTheme.labelMedium!.copyWith(
                   //* neutrall600
