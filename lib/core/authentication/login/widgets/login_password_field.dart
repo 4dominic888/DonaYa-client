@@ -1,31 +1,25 @@
 part of '../login_view.dart';
 
-class _LoginField extends StatelessWidget {
+class _LoginPasswordField extends StatefulWidget {
 
-  final String label;
-  final String description;
   final FocusNode focusNode;
-  final EdgeInsetsGeometry? padding;
-  final Widget? additionalWidget;
-  final void Function(String fieldValue)? onChanged;
-  final dynamic onErrorSelected;
-  final TextInputType? keyboardType;
-  final bool isPassword;
+  const _LoginPasswordField({ required this.focusNode });
 
-  const _LoginField({
-    required this.label,
-    required this.description,
-    required this.focusNode,
-    this.padding,
-    this.onErrorSelected,
-    this.additionalWidget,
-    this.onChanged,
-    this.keyboardType,
-    this.isPassword = false,
-  });
+  @override
+  State<_LoginPasswordField> createState() => _LoginPasswordFieldState();
+}
+
+class _LoginPasswordFieldState extends State<_LoginPasswordField> {
+
+  bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
+
+    final displayError = context.select(
+      (LoginBloc bloc) => bloc.state.password.displayError,
+    );
+
     final themeContext = Theme.of(context);
     return Column(
       children: [
@@ -34,22 +28,24 @@ class _LoginField extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: TextField(
-              key: Key('fieldForm_${label}Input_textField'),
-              focusNode: focusNode,
-              onChanged: (value) => EasyDebounce.debounce(
-                '${label}_${description}_anim',
+              key: Key('fieldForm_passwordInput_textField'),
+              focusNode: widget.focusNode,
+              onChanged: (password) => EasyDebounce.debounce(
+                'password_login_anim',
                 Duration(milliseconds: 100),
-                () => onChanged?.call(value),
+                () => context.read<LoginBloc>().add(LoginPasswordChanged(password)),
               ),
-              keyboardType: keyboardType,
-              obscureText: isPassword,
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: _isHidden,
               obscuringCharacter: '⏺',
               autofocus: false,
+              autofillHints: [AutofillHints.password],
+              onEditingComplete: () => TextInput.finishAutofillContext(),
               decoration: InputDecoration(
-                label: Text(label, style: TextStyle(color: themeContext.colorScheme.onPrimary)),
+                label: Text('Password', style: TextStyle(color: themeContext.colorScheme.onPrimary)),
                 helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
-                errorText: onErrorSelected?.message,
-                hintText: description,
+                errorText: displayError?.message,
+                hintText: 'Enter your password',
                 hintStyle: themeContext.textTheme.labelMedium!.copyWith(
                   //* neutrall600
                   fontWeight: FontWeight.w500,
@@ -57,41 +53,40 @@ class _LoginField extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0x00000000),
-                    // FlutterFlowTheme.of(context).neutral30,
                     width: 1,
                   ),
-                  // borderRadius: BorderRadius.circular(8),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: themeContext.colorScheme.onSecondaryContainer,
                     width: 1,
                   ),
-                  // borderRadius: BorderRadius.circular(8),
                 ),
                 errorBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: themeContext.colorScheme.error,
                     width: 1,
                   ),
-                  // borderRadius: BorderRadius.circular(8),
                 ),
                 focusedErrorBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: themeContext.colorScheme.error,
                     width: 1,
                   ),
-                  // borderRadius: BorderRadius.circular(8),
                 ),
                 filled: true,
                 fillColor: HSLColor.fromColor(themeContext.colorScheme.onPrimaryContainer).withLightness(
                   themeContext.brightness == Brightness.light ? 0.92 : 0.08,
                 ).toColor(),
+                suffixIcon: IconButton(
+                  onPressed: () => setState(() => _isHidden = !_isHidden),
+                  icon: _isHidden ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                )
               ),
               style: themeContext.textTheme.bodyMedium!.copyWith(
                 color: themeContext.colorScheme.onPrimary,
               ),
-              cursorColor: themeContext.colorScheme.onPrimary
+              cursorColor: themeContext.colorScheme.onPrimary,
             ),
           ),
         )
@@ -99,4 +94,3 @@ class _LoginField extends StatelessWidget {
     );
   }
 }
-

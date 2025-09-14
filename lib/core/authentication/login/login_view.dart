@@ -1,18 +1,21 @@
 import 'package:dona_ya/core/authentication/login/widgets/login_methods_card.dart';
-import 'package:dona_ya/core/authentication/login/widgets/or_separator.dart';
+import 'package:dona_ya/core/authentication/login/widgets/login_or_separator.dart';
 import 'package:dona_ya/core/authentication/widgets/auth_prompt.dart';
 import 'package:dona_ya/core/authentication/widgets/group_form.dart';
+import 'package:dona_ya/core/shared/app_text_field.dart';
 import 'package:dona_ya/core/shared/dona_ya_logo.dart';
 import 'package:dona_ya/core/shared/main_button.dart';
 import 'package:dona_ya/core/shared/flutter_flow_button.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 import 'bloc/login_bloc.dart';
 
-part 'widgets/login_field.dart';
+part 'widgets/login_password_field.dart';
+part 'widgets/login_submit_button.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -31,7 +34,6 @@ class _LoginViewState extends State<LoginView> {
     final themeContext = Theme.of(context);
 
     final emailDisplayError = context.select((LoginBloc bloc) => bloc.state.email.displayError);
-    final passwordDisplayError = context.select((LoginBloc bloc) => bloc.state.password.displayError);
 
     return GestureDetector(
       onTap: () {
@@ -54,7 +56,7 @@ class _LoginViewState extends State<LoginView> {
           body: SafeArea(
             top: true,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,104 +70,79 @@ class _LoginViewState extends State<LoginView> {
                     text: 'Login',
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-
-                          _LoginField(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
-                            label: 'Email',
-                            description: 'Enter your email',
-                            focusNode: _emailFocusNode,
-                            onChanged: (value) => context.read<LoginBloc>().add(LoginEmailChanged(value)),
-                            keyboardType: TextInputType.emailAddress,
-                            onErrorSelected: emailDisplayError,
-                          ),
-                      
-                          const SizedBox(height: 20),
-                      
-                          _LoginField(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            label: 'Password',
-                            description: 'Enter your password',
-                            focusNode: _passwordFocusNode,
-                            onChanged: (value) => context.read<LoginBloc>().add(LoginPasswordChanged(value)),
-                            onErrorSelected: passwordDisplayError,
-                            keyboardType: TextInputType.visiblePassword,
-                            isPassword: true,
-                            additionalWidget: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                // context.pushNamed(ForgotPasswordWidget.routeName);
-                              },
-                              child: Text(
-                                'Forgot Password?',
-                                style: themeContext.textTheme.bodyMedium!.copyWith(
-                                  fontWeight: FontWeight.normal,
-                                  color: themeContext.colorScheme.onSecondary,
-                                  fontSize: 14,
+                      child: AutofillGroup(
+                        child: Column(
+                          children: [
+                        
+                            //* Email
+                            AppTextField(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
+                              label: 'Email',
+                              description: 'Enter your email',
+                              focusNode: _emailFocusNode,
+                              onChanged: (value) => context.read<LoginBloc>().add(LoginEmailChanged(value)),
+                              keyboardType: TextInputType.emailAddress,
+                              onErrorSelected: emailDisplayError,
+                            ),
+                        
+                            const SizedBox(height: 20),
+                        
+                            //* Password
+                            _LoginPasswordField(
+                              focusNode: _passwordFocusNode
+                            ),
+                        
+                            //* Submit Button
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
+                              child: const _LoginSubmitButton()
+                            ),
+                        
+                            //* Or Separator
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 40),
+                              child: const OrSeparator(),
+                            ),
+                        
+                        
+                            //* Login Methods
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              spacing: 12,
+                              children: [
+                                const LoginMethodsCard(
+                                  label: 'Google',
+                                  iconData: FontAwesomeIcons.google,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  iconColor: Colors.white,
+                                ),
+                                const LoginMethodsCard(
+                                  label: 'Facebook',
+                                  iconData: FontAwesomeIcons.facebook,
+                                  backgroundColor: Colors.blue,
+                                  textColor: Colors.white,
+                                  iconColor: Colors.white,
+                                )
+                              ],
+                            ),
+                            
+                            //* Sign Up Link
+                            Align(
+                              alignment: AlignmentDirectional(0, -1),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                                child: AuthPrompt(
+                                  descriptionText: 'Don\'t have an account? ',
+                                  linkText: 'Sign Up',
+                                  onTap: () {
+                                    // TODO: Implement SignUp
+                                  },
                                 ),
                               ),
                             ),
-                          ),
-                      
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
-                            child: MainButton(
-                              onPressed: () async {
-                                // TODO: Implement Login
-                              },
-                              text: 'Continue',
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 40,
-                              )
-                            )
-                          ),
-
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 40),
-                            child: const OrSeparator(),
-                          ),
-
-
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            spacing: 12,
-                            children: [
-                              const LoginMethodsCard(
-                                label: 'Google',
-                                iconData: FontAwesomeIcons.google,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                iconColor: Colors.white,
-                              ),
-                              const LoginMethodsCard(
-                                label: 'Facebook',
-                                iconData: FontAwesomeIcons.facebook,
-                                backgroundColor: Colors.blue,
-                                textColor: Colors.white,
-                                iconColor: Colors.white,
-                              )
-                            ],
-                          ),
-                          
-                          Align(
-                            alignment: AlignmentDirectional(0, -1),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                              child: AuthPrompt(
-                                descriptionText: 'Don\'t have an account? ',
-                                linkText: 'Sign Up',
-                                onTap: () {
-                                  // TODO: Implement SignUp
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   )
