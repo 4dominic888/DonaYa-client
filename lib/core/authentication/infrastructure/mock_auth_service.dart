@@ -22,9 +22,6 @@ class MockAuthService extends AuthService {
   AuthenticationStatus get currentState => _currentState;
 
   @override
-  Future<bool> get isAuthenticated => throw UnimplementedError();
-
-  @override
   Stream<AuthenticationStatus> get status async * {
     await Future<void>.delayed(const Duration(seconds: 1));
     yield AuthenticationStatus.unauthenticated;

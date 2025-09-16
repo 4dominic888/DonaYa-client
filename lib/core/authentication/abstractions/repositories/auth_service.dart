@@ -37,9 +37,6 @@ abstract class AuthService {
   }
 
   Future<void> logout();
-
-  Future<bool> get isAuthenticated;
-
   Future<void> dispose();
 }
 
