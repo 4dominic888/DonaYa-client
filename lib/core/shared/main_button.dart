@@ -29,6 +29,8 @@ class _MainButtonState extends State<MainButton> {
       ),
       elevation: 0,
       borderRadius: BorderRadius.circular(8),
+      disabledColor: Colors.grey.withAlpha(30),
+      disabledTextColor: Theme.of(context).colorScheme.onPrimary.withAlpha(100),
     );
 
     return FFButtonWidget(
