@@ -23,6 +23,10 @@ class _LoginPasswordFieldState extends State<_LoginPasswordField> {
     final themeContext = Theme.of(context);
     return Column(
       children: [
+        const Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: _LoginForgotPasswordField()
+        ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
           child: SizedBox(
@@ -91,6 +95,32 @@ class _LoginPasswordFieldState extends State<_LoginPasswordField> {
           ),
         )
       ],
+    );
+  }
+}
+
+class _LoginForgotPasswordField extends StatelessWidget {
+  const _LoginForgotPasswordField() : super();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        // context.pushNamed(ForgotPasswordWidget.routeName);
+      },
+      child: Text(
+        'Forgot Password?',
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontWeight: FontWeight.normal,
+          color: Theme.of(context).colorScheme.onSecondary,
+          fontSize: 14,
+          decoration: TextDecoration.underline
+        ),
+      ),
     );
   }
 }
