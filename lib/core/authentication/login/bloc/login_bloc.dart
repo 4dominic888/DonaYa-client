@@ -1,6 +1,8 @@
 import 'package:dona_ya/core/authentication/abstractions/repositories/auth_service.dart';
 import 'package:dona_ya/core/authentication/login/models/email_input.dart';
 import 'package:dona_ya/core/authentication/login/models/password_input.dart';
+import 'package:dona_ya/core/shared/utils/app_error.dart';
+import 'package:dona_ya/logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
@@ -53,13 +55,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.isValid) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       try {
-        await _authService.login(
+        final result = await _authService.login(
           email: state.email.value,
           password: state.password.value,
         );
+
+        if (result.isErr) {
+          emit(state.copyWith(
+            status: FormzSubmissionStatus.failure,
+            error: result.unwrapErr(),
+          ));
+          return;
+        }
+        
         emit(state.copyWith(status: FormzSubmissionStatus.success));
-      } catch (_) {
-        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      } catch (e) {
+        emit(state.copyWith(
+          status: FormzSubmissionStatus.failure,
+          error: NetworkError.unknown,
+        ));
+        logger.e('Login bloc error', error: e);
       }
     }
   }

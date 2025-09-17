@@ -1,3 +1,5 @@
+import 'package:dona_ya/core/shared/utils/app_error.dart';
+
 sealed class Result<T, E> {
   const Result();
   
@@ -33,7 +35,8 @@ class Err<T, E> extends Result<T, E> {
   const Err(this.error);
 }
 
-typedef VoidResult = Result<void, String>;
+typedef SimpleVoidResult = Result<void, String>;
+typedef VoidAppResult = Result<void, AppError>;
 
 class ResultUnwrapException implements Exception {
   final Object message;
