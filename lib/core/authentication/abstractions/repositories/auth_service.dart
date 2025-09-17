@@ -1,4 +1,3 @@
-import 'package:dona_ya/core/authentication/abstractions/repositories/user_repository.dart';
 import 'package:dona_ya/core/authentication/abstractions/repositories/token_service.dart';
 import 'package:dona_ya/core/authentication/models/credentials.dart';
 import 'package:dona_ya/core/authentication/models/user_register.dart';
@@ -11,30 +10,14 @@ abstract class AuthService {
   Stream<AuthenticationStatus> get status;
   AuthenticationStatus get currentState;
 
-  final UserRepository userRepository;
+  User? get currentUser;
+  set currentUser(User? user);
+
   final TokenService tokenService;
-  AuthService({required this.userRepository, required this.tokenService});
+  AuthService({required this.tokenService});
 
-  Future<VoidResult> register({required final UserRegister userRegister, required final String password}) async {
-    if(!userRegister.isValid) return Err('Invalid user register, check fields and try again');
-
-    final registerResult = await userRepository.save(userRegister);
-    if(registerResult.isErr) return Err(registerResult.unwrapErr());
-
-    final authenticationResult = await tokenService.requestToken(email: userRegister.email.value, password: password);
-    if(authenticationResult.isErr) return Err(authenticationResult.unwrapErr());
-
-    return Ok(null);
-  }
-
-  Future<VoidResult> login({required final String email, required final String password}) async {
-    final loginResult = await userRepository.authenticate(email: email, password: password);
-    if(loginResult.isErr) return Err(loginResult.unwrapErr());
-    
-    await tokenService.saveTokens();
-
-    return Ok(null);
-  }
+  Future<VoidAppResult> register({required final UserRegister userRegister, required final String password});
+  Future<VoidAppResult> login({required final String email, required final String password});
 
   Future<void> logout();
   Future<void> dispose();

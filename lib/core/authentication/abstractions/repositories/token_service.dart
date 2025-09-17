@@ -7,6 +7,7 @@ abstract interface class TokenService {
   Future<void> refreshAccessToken();
   Future<void> clearTokens();
   
-  Future<Result<void, String>> requestToken({required String email, required String password});
-  Future<Result<void, String>> saveTokens();
+  Future<VoidAppResult> requestToken({required String email, required String password});
+  Future<VoidAppResult> validateTokens();
+  Future<VoidAppResult> saveTokens();
 }
