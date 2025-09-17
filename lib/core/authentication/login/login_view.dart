@@ -6,6 +6,7 @@ import 'package:dona_ya/core/shared/app_text_field.dart';
 import 'package:dona_ya/core/shared/dona_ya_logo.dart';
 import 'package:dona_ya/core/shared/main_button.dart';
 import 'package:dona_ya/core/shared/flutter_flow_button.dart';
+import 'package:dona_ya/core/shared/snackbars.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,13 +42,10 @@ class _LoginViewState extends State<LoginView> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: BlocListener<LoginBloc, LoginState>(
+        listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           if (state.status.isFailure) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                const SnackBar(content: Text('Authentication Failure')),
-              );
+            AppErrorSnackBar(message: state.error.message).show(context);
           }
         },
         child: Scaffold(
@@ -127,7 +125,7 @@ class _LoginViewState extends State<LoginView> {
                               ],
                             ),
                             
-                            //* Sign Up Link
+                            //* Sign Up Links
                             Align(
                               alignment: AlignmentDirectional(0, -1),
                               child: Padding(
