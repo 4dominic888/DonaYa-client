@@ -30,8 +30,8 @@ class GroupForm extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(
-            color: themeContext.colorScheme.primary.withAlpha(150),
-            width: 1,
+            color: themeContext.colorScheme.primary,
+            width: 3,
             style: BorderStyle.solid,
           ),
         ),
