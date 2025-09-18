@@ -1,4 +1,4 @@
-import 'package:dona_ya/core/shared/flutter_flow_button.dart';
+import 'package:dona_ya/core/shared/widgets/flutter_flow_button.dart';
 import 'package:flutter/material.dart';
 
 class MainButton extends StatefulWidget {

@@ -2,11 +2,11 @@ import 'package:dona_ya/core/authentication/login/widgets/login_methods_card.dar
 import 'package:dona_ya/core/authentication/login/widgets/login_or_separator.dart';
 import 'package:dona_ya/core/authentication/widgets/auth_prompt.dart';
 import 'package:dona_ya/core/authentication/widgets/group_form.dart';
-import 'package:dona_ya/core/shared/app_text_field.dart';
-import 'package:dona_ya/core/shared/dona_ya_logo.dart';
-import 'package:dona_ya/core/shared/main_button.dart';
-import 'package:dona_ya/core/shared/flutter_flow_button.dart';
-import 'package:dona_ya/core/shared/snackbars.dart';
+import 'package:dona_ya/core/shared/widgets/app_text_field.dart';
+import 'package:dona_ya/core/shared/widgets/dona_ya_logo.dart';
+import 'package:dona_ya/core/shared/widgets/main_button.dart';
+import 'package:dona_ya/core/shared/widgets/flutter_flow_button.dart';
+import 'package:dona_ya/core/shared/widgets/snackbars.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,9 +1,9 @@
 import 'package:dona_ya/core/authentication/authentication_routes.dart';
-import 'package:dona_ya/core/shared/dona_ya_logo.dart';
-import 'package:dona_ya/core/shared/main_button.dart';
+import 'package:dona_ya/core/shared/widgets/dona_ya_logo.dart';
+import 'package:dona_ya/core/shared/widgets/main_button.dart';
 import 'package:dona_ya/themes/app_color.dart';
 import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
-import 'package:dona_ya/core/shared/flutter_flow_button.dart';
+import 'package:dona_ya/core/shared/widgets/flutter_flow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
