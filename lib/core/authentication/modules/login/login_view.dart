@@ -1,5 +1,5 @@
-import 'package:dona_ya/core/authentication/login/widgets/login_methods_card.dart';
-import 'package:dona_ya/core/authentication/login/widgets/login_or_separator.dart';
+import 'package:dona_ya/core/authentication/modules/login/widgets/login_methods_card.dart';
+import 'package:dona_ya/core/authentication/modules/login/widgets/login_or_separator.dart';
 import 'package:dona_ya/core/authentication/widgets/auth_prompt.dart';
 import 'package:dona_ya/core/authentication/widgets/group_form.dart';
 import 'package:dona_ya/core/shared/widgets/app_text_field.dart';

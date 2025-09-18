@@ -1,6 +1,6 @@
 import 'package:dona_ya/core/authentication/abstractions/repositories/auth_service.dart';
-import 'package:dona_ya/core/authentication/login/models/email_input.dart';
-import 'package:dona_ya/core/authentication/login/models/password_input.dart';
+import 'package:dona_ya/core/authentication/modules/login/models/email_input.dart';
+import 'package:dona_ya/core/authentication/modules/login/models/password_input.dart';
 import 'package:dona_ya/core/shared/utils/app_error.dart';
 import 'package:dona_ya/logger.dart';
 import 'package:equatable/equatable.dart';

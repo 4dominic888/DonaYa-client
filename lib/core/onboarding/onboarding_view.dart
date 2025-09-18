@@ -76,7 +76,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
                       MainButton(
                         onPressed: () async {
-                          // context.pushNamed(SignUpWidget.routeName);
+                          //TODO Go to Register section
                         },
                         text: 'Sign Up',
                         options: FFButtonOptions(
