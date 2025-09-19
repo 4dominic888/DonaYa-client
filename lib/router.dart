@@ -26,7 +26,12 @@ class DonaYaRouter {
         path: AuthenticationRoutes.login.path,
         name: AuthenticationRoutes.login.name,
         builder: (context, state) => AuthenticationRoutes.login.view,
-      )
+      ),
+      GoRoute(
+        path: AuthenticationRoutes.register.path,
+        name: AuthenticationRoutes.register.name,
+        builder: (context, state) => AuthenticationRoutes.register.view,
+      ),
     ],
   );
 }

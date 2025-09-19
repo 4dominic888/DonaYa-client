@@ -6,4 +6,7 @@ class DonaYaConstants {
 
   static const String logoSvgLight = 'assets/svg/donaya-light.svg';
   static const String logoSvgDark = 'assets/svg/donaya-dark.svg';
+
+  static const String defaultUserAvatarLight = 'assets/svg/default-user-light.svg';
+  static const String defaultUserAvatarDark = 'assets/svg/default-user-dark.svg';
 }
