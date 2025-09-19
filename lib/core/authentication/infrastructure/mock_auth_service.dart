@@ -66,7 +66,7 @@ class MockAuthService extends AuthService {
     _currentUser = User(
       id: Random().nextInt(10000).toString(),
       email: userRegister.email.value,
-      name: userRegister.username,
+      name: userRegister.name,
       createdAt: DateTime.now().subtract(const Duration(days: 30)),
       lastLoginAt: DateTime.now().subtract(const Duration(hours: 2)),
     );
