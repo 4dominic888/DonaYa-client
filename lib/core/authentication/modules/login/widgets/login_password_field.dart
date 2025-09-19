@@ -46,6 +46,8 @@ class _LoginPasswordFieldState extends State<_LoginPasswordField> {
               autofillHints: [AutofillHints.password],
               onEditingComplete: () => TextInput.finishAutofillContext(),
               decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.lock),
+                prefixIconColor: themeContext.colorScheme.primary,
                 label: Text('Password', style: TextStyle(color: themeContext.colorScheme.onPrimary)),
                 helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
                 errorText: displayError?.message,

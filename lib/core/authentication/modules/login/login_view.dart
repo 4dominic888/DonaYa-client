@@ -81,6 +81,7 @@ class _LoginViewState extends State<LoginView> {
                               onChanged: (value) => context.read<LoginBloc>().add(LoginEmailChanged(value)),
                               keyboardType: TextInputType.emailAddress,
                               onErrorSelected: emailDisplayError,
+                              icon: const Icon(Icons.alternate_email),
                             ),
                         
                             const SizedBox(height: 20),

@@ -11,6 +11,7 @@ class AppTextField extends StatelessWidget {
   final void Function(String fieldValue)? onChanged;
   final dynamic onErrorSelected;
   final TextInputType? keyboardType;
+  final Widget? icon;
 
   const AppTextField({
     super.key,
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
     this.additionalWidget,
     this.onChanged,
     this.keyboardType,
+    this.icon,
   });
 
   @override
@@ -77,6 +79,8 @@ class AppTextField extends StatelessWidget {
                   ),
                 ),
                 filled: true,
+                prefixIcon: icon,
+                prefixIconColor: themeContext.colorScheme.primary,
                 fillColor: HSLColor.fromColor(themeContext.colorScheme.onPrimaryContainer).withLightness(
                   themeContext.brightness == Brightness.light ? 0.92 : 0.08,
                 ).toColor(),
