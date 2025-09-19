@@ -16,13 +16,15 @@ class _OnboardingPage extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-          child: Container(
-            width: double.infinity,
-            height: 366,
-            decoration: squareImage ?? BoxDecoration(
-              color: Theme.of(context).colorScheme.onSecondaryContainer
+        Expanded(
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 0),
+            child: Container(
+              width: double.infinity,
+              height: 366,
+              decoration: squareImage ?? BoxDecoration(
+                color: Theme.of(context).colorScheme.onSecondaryContainer
+              ),
             ),
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:dona_ya/core/authentication/authentication_routes.dart';
-import 'package:dona_ya/core/shared/widgets/dona_ya_logo.dart';
+import 'package:dona_ya/core/shared/widgets/app_logos.dart';
 import 'package:dona_ya/core/shared/widgets/main_button.dart';
 import 'package:dona_ya/themes/app_color.dart';
 import 'package:dona_ya/core/onboarding/bloc/onboarding_cubit.dart';
@@ -75,9 +75,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       ),
 
                       MainButton(
-                        onPressed: () async {
-                          //TODO Go to Register section
-                        },
+                        onPressed: () => context.push(AuthenticationRoutes.register.path),
                         text: 'Sign Up',
                         options: FFButtonOptions(
                           width: double.infinity,
