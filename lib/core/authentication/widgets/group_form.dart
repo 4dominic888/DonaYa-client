@@ -16,27 +16,30 @@ class GroupForm extends StatelessWidget {
 
     final themeContext = Theme.of(context);
 
-    return InputDecorator(
-      decoration: InputDecoration(
-        labelText: text,
-        labelStyle: themeContext.textTheme.bodyMedium!.copyWith(
-          color: themeContext.colorScheme.primary,
-          fontWeight: FontWeight.bold,
-          fontSize: 28,
-        ),
-        floatingLabelAlignment: FloatingLabelAlignment.center,
-        fillColor: themeContext.colorScheme.onSecondaryContainer.withValues(alpha: 0.55),
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: BorderSide(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: text,
+          labelStyle: themeContext.textTheme.bodyMedium!.copyWith(
             color: themeContext.colorScheme.primary,
-            width: 3,
-            style: BorderStyle.solid,
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+          ),
+          floatingLabelAlignment: FloatingLabelAlignment.center,
+          fillColor: themeContext.colorScheme.onSecondaryContainer.withValues(alpha: 0.55),
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(32),
+            borderSide: BorderSide(
+              color: themeContext.colorScheme.primary,
+              width: 3,
+              style: BorderStyle.solid,
+            ),
           ),
         ),
+        child: child,
       ),
-      child: child,
     );
   }
 }
