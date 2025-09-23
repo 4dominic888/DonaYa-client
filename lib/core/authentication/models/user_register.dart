@@ -1,8 +1,9 @@
 import 'package:dona_ya/core/shared/models/contact_info.dart';
+import 'package:flutter_intl_phone_field/phone_number.dart';
 
 abstract class UserRegister {
   final EmailContact email;
-  final PhoneNumberContact phone;
+  final PhoneNumber phone;
   String get name;
 
   const UserRegister({
