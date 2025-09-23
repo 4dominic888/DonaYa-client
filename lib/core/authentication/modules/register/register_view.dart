@@ -1,7 +1,15 @@
+import 'package:dona_ya/core/authentication/modules/login/widgets/login_methods_card.dart';
+import 'package:dona_ya/core/authentication/modules/login/widgets/login_or_separator.dart';
+import 'package:dona_ya/core/authentication/modules/register/bloc/register_bloc.dart';
+import 'package:dona_ya/core/authentication/modules/register/widgets/phone_field.dart';
 import 'package:dona_ya/core/authentication/widgets/group_form.dart';
 import 'package:dona_ya/core/shared/widgets/app_logos.dart';
 import 'package:dona_ya/core/shared/widgets/app_text_field.dart';
+import 'package:dona_ya/core/shared/widgets/flutter_flow_button.dart';
+import 'package:dona_ya/core/shared/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterView extends StatefulWidget {
@@ -18,13 +26,20 @@ class _RegisterViewState extends State<RegisterView> {
   final _surnameFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  final _phoneFocusNode = FocusNode();
+  // final _phoneFocusNode = FocusNode();
   final _birthdateFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
 
     final themeContext = Theme.of(context);
+
+    final nameDisplayError = context.select((RegisterBloc bloc) => bloc.state.name.displayError);
+    final surnameDisplayError = context.select((RegisterBloc bloc) => bloc.state.surname.displayError);
+    final emailDisplayError = context.select((RegisterBloc bloc) => bloc.state.email.displayError);
+    final passwordDisplayError = context.select((RegisterBloc bloc) => bloc.state.password.displayError);
+    final phoneDisplayError = context.select((RegisterBloc bloc) => bloc.state.phone.displayError);
+    final birthdateDisplayError = context.select((RegisterBloc bloc) => bloc.state.birthdate.displayError);
 
     return GestureDetector(
       onTap: () {
@@ -46,13 +61,13 @@ class _RegisterViewState extends State<RegisterView> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 30),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 20,
+                spacing: 5,
                 children: [
                   const DonaYaLogo(size: 55),
 
@@ -68,6 +83,7 @@ class _RegisterViewState extends State<RegisterView> {
 
                             const AppTitleText(label: 'Full name'),
 
+                            //* Full name
                             Row(
                               spacing: 20,
                               children: [
@@ -76,6 +92,8 @@ class _RegisterViewState extends State<RegisterView> {
                                     label: 'Name',
                                     description: 'Enter your name',
                                     focusNode: _nameFocusNode,
+                                    onChanged: (value) => context.read<RegisterBloc>().add(RegisterFirstNameChanged(value)),
+                                    onErrorSelected: nameDisplayError,
                                     icon: const Icon(Icons.person),
                                   ),
                                 ),
@@ -85,6 +103,8 @@ class _RegisterViewState extends State<RegisterView> {
                                     label: 'Surname',
                                     description: 'Enter your surname',
                                     focusNode: _surnameFocusNode,
+                                    onChanged: (value) => context.read<RegisterBloc>().add(RegisterSurnameChanged(value)),
+                                    onErrorSelected: surnameDisplayError,
                                     icon: const Icon(Icons.person),
                                   ),
                                 ),
@@ -99,6 +119,8 @@ class _RegisterViewState extends State<RegisterView> {
                               label: 'Email',
                               description: 'Enter your email',
                               icon: const Icon(Icons.alternate_email),
+                              onChanged: (value) => context.read<RegisterBloc>().add(RegisterEmailChanged(value)),
+                              onErrorSelected: emailDisplayError,
                               focusNode: _emailFocusNode
                             ),
 
@@ -107,6 +129,8 @@ class _RegisterViewState extends State<RegisterView> {
                               description: 'Enter your password',
                               focusNode: _passwordFocusNode,
                               keyboardType: TextInputType.visiblePassword,
+                              onChanged: (value) => context.read<RegisterBloc>().add(RegisterPasswordChanged(value)),
+                              onErrorSelected: passwordDisplayError,
                               isPassword: true,
                               icon: const Icon(Icons.lock),
                             ),
@@ -115,17 +139,17 @@ class _RegisterViewState extends State<RegisterView> {
 
                             const AppTitleText(label: 'Phone and Birthdate'),
 
-                            AppTextField(
-                              label: 'Phone',
-                              description: 'Enter your phone',
-                              focusNode: _phoneFocusNode,
-                              icon: const Icon(Icons.phone),
+                            PhoneField(
+                              onChanged: (value) => context.read<RegisterBloc>().add(RegisterPhoneChanged(value)),
+                              onErrorSelected: phoneDisplayError,
                             ),
 
                             AppTextField(
                               label: 'Birthdate',
                               description: 'Enter your birthdate',
                               focusNode: _birthdateFocusNode,
+                              onChanged: (value) => context.read<RegisterBloc>().add(RegisterBirthdateChanged(value)),
+                              onErrorSelected: birthdateDisplayError,
                               icon: const Icon(Icons.calendar_today),
                             ),
 
@@ -133,7 +157,41 @@ class _RegisterViewState extends State<RegisterView> {
                         )
                       ),
                     )
-                  )
+                  ),
+                
+                  MainButton(
+                    onPressed: () {},
+                    text: 'Register',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 45,
+                    )
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  OrSeparator(),
+
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    spacing: 12,
+                    children: [
+                      const LoginMethodsCard(
+                        label: 'Google',
+                        iconData: FontAwesomeIcons.google,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        iconColor: Colors.white,
+                      ),
+                      const LoginMethodsCard(
+                        label: 'Facebook',
+                        iconData: FontAwesomeIcons.facebook,
+                        backgroundColor: Colors.blue,
+                        textColor: Colors.white,
+                        iconColor: Colors.white,
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:dona_ya/core/shared/utils/app_input_decoration.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ class AppTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final Widget? icon;
   final bool isPassword;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
     super.key,
@@ -26,7 +28,8 @@ class AppTextField extends StatefulWidget {
     this.onChanged,
     this.keyboardType,
     this.icon,
-    this.isPassword = false
+    this.isPassword = false,
+    this.inputFormatters,
   });
 
   @override
@@ -60,6 +63,7 @@ class _AppTextFieldState extends State<AppTextField> {
               key: Key('fieldForm_${widget.label}Input_textField'),
               focusNode: widget.focusNode,
               obscuringCharacter: '⏺',
+              inputFormatters: widget.inputFormatters,
               autofillHints: widget.isPassword ? [AutofillHints.password] : null,
               onEditingComplete: () => TextInput.finishAutofillContext(),
               onChanged: (value) => EasyDebounce.debounce(
@@ -70,52 +74,63 @@ class _AppTextFieldState extends State<AppTextField> {
               keyboardType: widget.keyboardType,
               obscureText: _isHidden,
               autofocus: false,
-              decoration: InputDecoration(
-                label: Text(widget.label, style: TextStyle(color: themeContext.colorScheme.primary.withAlpha(190))),
-                helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
+              decoration: AppInputDecoration(
+                text: widget.label,
+                theme: themeContext,
                 errorText: widget.onErrorSelected?.message,
                 hintText: widget.description,
-                hintStyle: themeContext.textTheme.labelMedium!.copyWith(
-                  fontWeight: FontWeight.w500
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0x00000000),
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: themeContext.colorScheme.onSecondaryContainer,
-                    width: 1,
-                  ),
-                ),
-                errorBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: themeContext.colorScheme.error,
-                    width: 1,
-                  ),
-                ),
-                focusedErrorBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: themeContext.colorScheme.error,
-                    width: 1,
-                  ),
-                ),
-                filled: true,
                 prefixIcon: widget.icon,
-                prefixIconColor: themeContext.colorScheme.primary,
                 suffixIcon: widget.isPassword ? IconButton(
                   onPressed: () => setState(() => _isHidden = !_isHidden),
                   icon: _isHidden ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
-                ) : null,
-                fillColor: HSLColor.fromColor(themeContext.colorScheme.onPrimaryContainer).withLightness(
-                  themeContext.brightness == Brightness.light ? 0.92 : 0.08,
-                ).toColor(),
+                ) : null
               ),
-              style: themeContext.textTheme.bodyMedium!.copyWith(
-                color: widget.isPassword && _isHidden ? themeContext.colorScheme.primary : themeContext.colorScheme.onPrimary,
-              ),
+              // decoration: InputDecoration(
+              //   label: Text(widget.label, style: TextStyle(color: themeContext.colorScheme.primary.withAlpha(190))),
+              //   helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
+              //   errorText: widget.onErrorSelected?.message,
+              //   hintText: widget.description,
+              //   hintStyle: themeContext.textTheme.labelMedium!.copyWith(
+              //     fontWeight: FontWeight.w500
+              //   ),
+              //   enabledBorder: OutlineInputBorder(
+              //     borderSide: BorderSide(
+              //       color: Color(0x00000000),
+              //       width: 1,
+              //     ),
+              //   ),
+              //   focusedBorder: UnderlineInputBorder(
+              //     borderSide: BorderSide(
+              //       color: themeContext.colorScheme.onSecondaryContainer,
+              //       width: 1,
+              //     ),
+              //   ),
+              //   errorBorder: UnderlineInputBorder(
+              //     borderSide: BorderSide(
+              //       color: themeContext.colorScheme.error,
+              //       width: 1,
+              //     ),
+              //   ),
+              //   focusedErrorBorder: UnderlineInputBorder(
+              //     borderSide: BorderSide(
+              //       color: themeContext.colorScheme.error,
+              //       width: 1,
+              //     ),
+              //   ),
+              //   filled: true,
+              //   prefixIcon: widget.icon,
+              //   prefixIconColor: themeContext.colorScheme.primary,
+              //   suffixIcon: widget.isPassword ? IconButton(
+              //     onPressed: () => setState(() => _isHidden = !_isHidden),
+              //     icon: _isHidden ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+              //   ) : null,
+              //   fillColor: HSLColor.fromColor(themeContext.colorScheme.onPrimaryContainer).withLightness(
+              //     themeContext.brightness == Brightness.light ? 0.92 : 0.08,
+              //   ).toColor(),
+              // ),
+              // style: themeContext.textTheme.bodyMedium!.copyWith(
+              //   color: widget.isPassword && _isHidden ? themeContext.colorScheme.primary : themeContext.colorScheme.onPrimary,
+              // ),
               cursorColor: themeContext.colorScheme.onPrimary
             ),
           ),
