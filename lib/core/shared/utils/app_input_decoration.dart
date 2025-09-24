@@ -54,7 +54,13 @@ class AppInputDecoration extends InputDecoration {
 
 
   }) : super(
-    label: Text(text, style: TextStyle(color: theme.colorScheme.primary.withAlpha(190))),
+    label: Text(
+      text, 
+      style: TextStyle(
+        color: (
+          theme.brightness == Brightness.dark ? 
+          theme.colorScheme.primary : theme.colorScheme.onPrimary)
+        .withAlpha(120))),
     helperStyle: TextStyle(color: theme.colorScheme.secondary),
     hintStyle: theme.textTheme.labelMedium!.copyWith(
       fontWeight: FontWeight.w500

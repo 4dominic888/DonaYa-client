@@ -247,6 +247,9 @@ class DonaYaTheme {
       onSecondaryContainer: DonaYaColorsDark.secondaryBackground,
     ),
     extensions: [_extraColorsDark],
-    textTheme: DonaYaTextTheme.dark
+    listTileTheme: ListTileThemeData(
+      textColor: DonaYaColorsDark.primary,
+    ),
+    textTheme: DonaYaTextTheme.dark,
   );
 }

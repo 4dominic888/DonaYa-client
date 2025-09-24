@@ -20,17 +20,21 @@ class MainButton extends StatefulWidget {
 class _MainButtonState extends State<MainButton> {
   @override
   Widget build(BuildContext context) {
+
+    final themeContext = Theme.of(context);
+
     final ffbuttonOptionsDefault = FFButtonOptions(
-      color: Theme.of(context).colorScheme.primary,
+      color: themeContext.colorScheme.primary,
       textStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: themeContext.brightness == Brightness.dark ? 
+          themeContext.colorScheme.onPrimary : themeContext.colorScheme.onPrimaryContainer
       ),
       elevation: 0,
       borderRadius: BorderRadius.circular(8),
       disabledColor: Colors.grey.withAlpha(30),
-      disabledTextColor: Theme.of(context).colorScheme.onPrimary.withAlpha(100),
+      disabledTextColor: themeContext.colorScheme.onPrimary.withAlpha(100),
     );
 
     return FFButtonWidget(
