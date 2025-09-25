@@ -23,7 +23,7 @@ class _LoginSubmitButton extends StatelessWidget {
         }
         : null,
       text: 'Continue',
-      options: FFButtonOptions(
+      options: const FFButtonOptions(
         width: double.infinity,
         height: 40,
       )

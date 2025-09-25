@@ -1,6 +1,7 @@
 import 'package:dona_ya/core/authentication/modules/login/widgets/login_methods_card.dart';
 import 'package:dona_ya/core/authentication/modules/login/widgets/login_or_separator.dart';
 import 'package:dona_ya/core/authentication/modules/register/bloc/register_bloc.dart';
+import 'package:dona_ya/core/authentication/modules/register/widgets/app_title_text.dart';
 import 'package:dona_ya/core/authentication/modules/register/widgets/phone_field.dart';
 import 'package:dona_ya/core/authentication/widgets/group_form.dart';
 import 'package:dona_ya/core/shared/widgets/app_logos.dart';
@@ -8,9 +9,13 @@ import 'package:dona_ya/core/shared/widgets/app_text_field.dart';
 import 'package:dona_ya/core/shared/widgets/flutter_flow_button.dart';
 import 'package:dona_ya/core/shared/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+
+part 'widgets/register_submit_button.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({ super.key });
@@ -157,15 +162,8 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     )
                   ),
-                
-                  MainButton(
-                    onPressed: () {},
-                    text: 'Register',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 45,
-                    )
-                  ),
+
+                  const _RegisterSubmitButton(),
 
                   const SizedBox(height: 10),
 
@@ -197,30 +195,6 @@ class _RegisterViewState extends State<RegisterView> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class AppTitleText extends StatelessWidget {
-
-  final String label;
-
-  const AppTitleText({super.key, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-
-    final themeContext = Theme.of(context);
-
-    return Align(
-      alignment: AlignmentDirectional.centerStart,
-      child: Text(label,
-        style: themeContext.textTheme.bodyMedium!.copyWith(
-          color: themeContext.colorScheme.primary,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        )
-      )
     );
   }
 }
