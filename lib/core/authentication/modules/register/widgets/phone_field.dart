@@ -28,43 +28,53 @@ class _PhoneFieldState extends State<PhoneField> {
 
     final themeContext = Theme.of(context);
 
-    return IntlPhoneField(
-      decoration: AppInputDecoration(
-        text: 'Phone',
-        theme: themeContext,
-        errorText: widget.onErrorSelected?.message,
-        hintText: 'Enter your phone number',
-      ),
-      dropdownIcon: const Icon(Icons.phone),
-      keyboardType: TextInputType.phone,
-      languageCode: 'es',
-      showCountryFlag: true,
-      buildCounter: (_, {currentLength=0, maxLength, isFocused=true}) => Text(
-        '$currentLength/$maxLength',
-        style: themeContext.textTheme.labelSmall,
-      ),
-      pickerDialogStyle: PickerDialogStyle(
-        backgroundColor: themeContext.colorScheme.onSecondaryContainer,
-        countryCodeStyle: TextStyle(
-          color: themeContext.colorScheme.onSecondary
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+          child: IntlPhoneField(
+            decoration: AppInputDecoration(
+              text: 'Phone',
+              theme: themeContext,
+              errorText: widget.onErrorSelected?.message,
+              hintText: 'Enter your phone number',
+              isDense: false,
+              errorMaxLines: null
+            ),
+            dropdownIcon: const Icon(Icons.phone),
+            keyboardType: TextInputType.phone,
+            languageCode: 'es',
+            showCountryFlag: true,
+            buildCounter: (_, {currentLength=0, maxLength, isFocused=true}) => Text(
+              '$currentLength/$maxLength',
+              style: themeContext.textTheme.labelSmall,
+            ),
+            pickerDialogStyle: PickerDialogStyle(
+              backgroundColor: themeContext.colorScheme.onSecondaryContainer,
+              countryCodeStyle: TextStyle(
+                color: themeContext.colorScheme.onSecondary
+              ),
+              countryNameStyle: TextStyle(
+                color: themeContext.colorScheme.onPrimary
+              ),
+              dialogPadding: const EdgeInsets.all(40.0),
+              listTileDivider: Divider(
+                color: themeContext.colorScheme.onSecondaryContainer,
+              ),
+              searchFieldInputDecoration: AppInputDecoration(
+                text: 'Search',
+                theme: themeContext,
+                hintText: 'Search for a country',
+                prefixIcon: const Icon(Icons.search),
+              ),
+            ),
+            initialCountryCode: 'PE',
+            focusNode: focusNode,
+            onChanged: widget.onChanged,
+          ),
         ),
-        countryNameStyle: TextStyle(
-          color: themeContext.colorScheme.onPrimary
-        ),
-        dialogPadding: const EdgeInsets.all(40.0),
-        listTileDivider: Divider(
-          color: themeContext.colorScheme.onSecondaryContainer,
-        ),
-        searchFieldInputDecoration: AppInputDecoration(
-          text: 'Search',
-          theme: themeContext,
-          hintText: 'Search for a country',
-          prefixIcon: const Icon(Icons.search),
-        ),
-      ),
-      initialCountryCode: 'PE',
-      focusNode: focusNode,
-      onChanged: widget.onChanged,
+      ],
     );
   }
 }

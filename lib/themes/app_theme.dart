@@ -227,7 +227,30 @@ class DonaYaTheme {
       onSecondaryContainer: DonaYaColorsLight.secondaryBackground,
     ),
     extensions: [_extraColorsLight],
-    textTheme: DonaYaTextTheme.light
+    textTheme: DonaYaTextTheme.light,
+    dialogTheme: DialogThemeData(
+      backgroundColor: DonaYaColorsLight.secondaryBackground,
+    ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: DonaYaColorsLight.secondaryBackground,
+      headerForegroundColor: DonaYaColorsLight.secondaryText,
+      yearForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return DonaYaColorsLight.primaryBackground;
+        } else if (states.contains(WidgetState.disabled)) {
+          return DonaYaColorsLight.secondaryText.withAlpha(78);
+        }
+        return DonaYaColorsLight.secondaryText;
+      }),
+      dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return DonaYaColorsLight.primaryBackground;
+        } else if (states.contains(WidgetState.disabled)) {
+          return DonaYaColorsLight.secondaryText;
+        }
+        return DonaYaColorsLight.primaryText;
+      }),
+    ),
   );
 
   static final dark = ThemeData(
@@ -249,6 +272,22 @@ class DonaYaTheme {
     extensions: [_extraColorsDark],
     listTileTheme: ListTileThemeData(
       textColor: DonaYaColorsDark.primary,
+    ),
+    dialogTheme: DialogThemeData(
+      backgroundColor: DonaYaColorsDark.secondaryBackground,
+    ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: DonaYaColorsDark.secondaryBackground,
+      headerForegroundColor: DonaYaColorsDark.secondaryText,
+      yearForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return DonaYaColorsDark.secondaryText;
+        } else if (states.contains(WidgetState.disabled)) {
+          return DonaYaColorsDark.secondaryText.withAlpha(78);
+        }
+        return DonaYaColorsDark.secondaryText;
+      }),
+      dividerColor: DonaYaColorsDark.primary,
     ),
     textTheme: DonaYaTextTheme.dark,
   );

@@ -4,6 +4,7 @@ import 'package:dona_ya/core/authentication/modules/register/bloc/register_bloc.
 import 'package:dona_ya/core/authentication/modules/register/widgets/app_title_text.dart';
 import 'package:dona_ya/core/authentication/modules/register/widgets/phone_field.dart';
 import 'package:dona_ya/core/authentication/widgets/group_form.dart';
+import 'package:dona_ya/core/shared/widgets/app_date_field.dart';
 import 'package:dona_ya/core/shared/widgets/app_logos.dart';
 import 'package:dona_ya/core/shared/widgets/app_text_field.dart';
 import 'package:dona_ya/core/shared/widgets/flutter_flow_button.dart';
@@ -31,7 +32,6 @@ class _RegisterViewState extends State<RegisterView> {
   final _surnameFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  final _birthdateFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -148,14 +148,15 @@ class _RegisterViewState extends State<RegisterView> {
                               onErrorSelected: phoneDisplayError,
                             ),
 
-                            AppTextField(
-                              label: 'Birthdate',
+                            AppDateField(
+                              label: 'Birthdate (dd/MM/yyyy)',
                               description: 'Enter your birthdate',
-                              focusNode: _birthdateFocusNode,
                               onChanged: (value) => context.read<RegisterBloc>().add(RegisterBirthdateChanged(value)),
                               onErrorSelected: birthdateDisplayError,
                               icon: const Icon(Icons.calendar_today),
-                            ),
+                              firstDate: DateTime(1900, 1, 1),
+                              lastDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
+                            )
 
                           ],
                         )

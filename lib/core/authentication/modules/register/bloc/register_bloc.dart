@@ -117,7 +117,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       try {
         final result = await _authService.register(
           userRegister: CustomUserRegister(
-            birthday: DateTime.parse(state.birthdate.value),
+            birthday: state.birthdate.value!,
             email: EmailContact(state.email.value),
             firstName: state.name.value,
             lastName: state.surname.value,

@@ -4,7 +4,7 @@ sealed class RegisterEvent extends Equatable {
   const RegisterEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 final class RegisterFirstNameChanged extends RegisterEvent {
@@ -55,10 +55,10 @@ final class RegisterPhoneChanged extends RegisterEvent {
 final class RegisterBirthdateChanged extends RegisterEvent {
   const RegisterBirthdateChanged(this.birthdate);
 
-  final String birthdate;
+  final DateTime? birthdate;
 
   @override
-  List<Object> get props => [birthdate];
+  List<Object?> get props => [birthdate];
 }
 
 final class RegisterSubmitted extends RegisterEvent {
