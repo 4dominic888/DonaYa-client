@@ -10,12 +10,12 @@ final class RegisterState extends Equatable {
     this.password = const PasswordInput.pure(),
     this.phone = const PhoneInput.pure(),
     this.birthdate = const BirthdateInput.pure(),
-    this.isValid = true,
+    this.isValid = false,
     this.error = NoError.empty,
   });
 
   final FormzSubmissionStatus status;
-  final AppError? error;
+  final AppError error;
   final NameInput name;
   final SurnameInput surname;
   final EmailInput email;

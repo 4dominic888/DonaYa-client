@@ -60,12 +60,12 @@ class MockAuthService extends AuthService {
   Future<VoidAppResult> register({required final UserRegister userRegister, required final String password}) async {
     await MockUtils.fakeDelay();
 
-    if(userRegister.email.value != 'test@example.com') return Err(AuthenticationError.emailAlreadyExists);
+    if(userRegister.email == 'test@example.com') return Err(AuthenticationError.emailAlreadyExists);
     if(!userRegister.isValid) return Err(AuthenticationError.badRegistrationData);
 
     _currentUser = User(
       id: Random().nextInt(10000).toString(),
-      email: userRegister.email.value,
+      email: userRegister.email,
       name: userRegister.name,
       createdAt: DateTime.now().subtract(const Duration(days: 30)),
       lastLoginAt: DateTime.now().subtract(const Duration(hours: 2)),

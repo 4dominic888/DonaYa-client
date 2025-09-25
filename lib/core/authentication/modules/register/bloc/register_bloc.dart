@@ -2,7 +2,6 @@ import 'package:dona_ya/core/authentication/abstractions/repositories/auth_servi
 import 'package:dona_ya/core/authentication/models/user_register.dart';
 import 'package:dona_ya/core/authentication/modules/login/models/models.dart';
 import 'package:dona_ya/core/authentication/modules/register/models/models.dart';
-import 'package:dona_ya/core/shared/models/contact_info.dart';
 import 'package:dona_ya/core/shared/utils/app_error.dart';
 import 'package:dona_ya/logger.dart';
 import 'package:equatable/equatable.dart';
@@ -38,7 +37,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         name: firstName,
-        isValid: Formz.validate([firstName, state.surname, state.phone, state.birthdate]),
+        isValid: Formz.validate([firstName, state.surname, state.email, state.password, state.phone, state.birthdate]),
       ),
     );
   }
@@ -51,7 +50,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         surname: surname,
-        isValid: Formz.validate([surname, state.name, state.phone, state.birthdate]),
+        isValid: Formz.validate([surname, state.name, state.email, state.password, state.phone, state.birthdate]),
       ),
     );
   }
@@ -64,7 +63,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         email: email,
-        isValid: Formz.validate([email, state.name, state.surname, state.phone, state.birthdate]),
+        isValid: Formz.validate([email, state.name, state.surname, state.password, state.phone, state.birthdate]),
       ),
     );
   }
@@ -118,7 +117,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         final result = await _authService.register(
           userRegister: CustomUserRegister(
             birthday: state.birthdate.value!,
-            email: EmailContact(state.email.value),
+            email: state.email.value,
             firstName: state.name.value,
             lastName: state.surname.value,
             phone: PhoneNumber.fromCompleteNumber(completeNumber: state.phone.value),

@@ -1,20 +1,3 @@
-class EmailContact {
-  final String value;
-
-  EmailContact._(this.value);
-
-  factory EmailContact(String input) {
-    final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+(com|net|org)$');
-    if (!regex.hasMatch(input)) {
-      throw FormatException('Invalid email format: $input');
-    }
-    return EmailContact._(input);
-  }
-
-  @override
-  String toString() => value;
-}
-
 class AddressContact {
   final String street;
   final int? number;

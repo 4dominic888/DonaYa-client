@@ -2,7 +2,7 @@ import 'package:dona_ya/core/shared/models/contact_info.dart';
 import 'package:flutter_intl_phone_field/phone_number.dart';
 
 abstract class UserRegister {
-  final EmailContact email;
+  final String email;
   final PhoneNumber phone;
   String get name;
 
@@ -33,7 +33,7 @@ class CustomUserRegister extends UserRegister {
   });
 
   @override
-  bool get isValid => birthday.isAfter(DateTime.now()) && firstName.isNotEmpty && lastName.isNotEmpty;
+  bool get isValid => birthday.isBefore(DateTime.now()) && firstName.isNotEmpty && lastName.isNotEmpty;
 
   @override
   String get name => '$firstName $lastName';

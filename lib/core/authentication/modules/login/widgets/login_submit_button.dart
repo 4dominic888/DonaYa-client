@@ -16,8 +16,7 @@ class _LoginSubmitButton extends StatelessWidget {
     final isValid = context.select((LoginBloc bloc) => bloc.state.isValid);
 
     return MainButton(
-      onPressed: isValid
-        ? () {
+      onPressed: isValid ? () {
           TextInput.finishAutofillContext();
           context.read<LoginBloc>().add(const LoginSubmitted());
         }
