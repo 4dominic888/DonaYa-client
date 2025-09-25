@@ -26,10 +26,5 @@ class PhoneInput extends FormzInput<String, PhoneValidationError> {
     if(phone.completeNumber.isEmpty) return PhoneValidationError.empty;
     if(!phone.isValidNumber()) return PhoneValidationError.invalid;
     return null;
-    // if (value.isEmpty) return PhoneValidationError.empty;
-
-    // final phoneNumber = PhoneNumberContact.fromString(value);
-    // if (phoneNumber == null) return PhoneValidationError.invalid;
-    // return null;
   }
 }

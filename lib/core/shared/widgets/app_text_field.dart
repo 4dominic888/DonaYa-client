@@ -85,52 +85,6 @@ class _AppTextFieldState extends State<AppTextField> {
                   icon: _isHidden ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
                 ) : null
               ),
-              // decoration: InputDecoration(
-              //   label: Text(widget.label, style: TextStyle(color: themeContext.colorScheme.primary.withAlpha(190))),
-              //   helperStyle: TextStyle(color: themeContext.colorScheme.secondary),
-              //   errorText: widget.onErrorSelected?.message,
-              //   hintText: widget.description,
-              //   hintStyle: themeContext.textTheme.labelMedium!.copyWith(
-              //     fontWeight: FontWeight.w500
-              //   ),
-              //   enabledBorder: OutlineInputBorder(
-              //     borderSide: BorderSide(
-              //       color: Color(0x00000000),
-              //       width: 1,
-              //     ),
-              //   ),
-              //   focusedBorder: UnderlineInputBorder(
-              //     borderSide: BorderSide(
-              //       color: themeContext.colorScheme.onSecondaryContainer,
-              //       width: 1,
-              //     ),
-              //   ),
-              //   errorBorder: UnderlineInputBorder(
-              //     borderSide: BorderSide(
-              //       color: themeContext.colorScheme.error,
-              //       width: 1,
-              //     ),
-              //   ),
-              //   focusedErrorBorder: UnderlineInputBorder(
-              //     borderSide: BorderSide(
-              //       color: themeContext.colorScheme.error,
-              //       width: 1,
-              //     ),
-              //   ),
-              //   filled: true,
-              //   prefixIcon: widget.icon,
-              //   prefixIconColor: themeContext.colorScheme.primary,
-              //   suffixIcon: widget.isPassword ? IconButton(
-              //     onPressed: () => setState(() => _isHidden = !_isHidden),
-              //     icon: _isHidden ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
-              //   ) : null,
-              //   fillColor: HSLColor.fromColor(themeContext.colorScheme.onPrimaryContainer).withLightness(
-              //     themeContext.brightness == Brightness.light ? 0.92 : 0.08,
-              //   ).toColor(),
-              // ),
-              // style: themeContext.textTheme.bodyMedium!.copyWith(
-              //   color: widget.isPassword && _isHidden ? themeContext.colorScheme.primary : themeContext.colorScheme.onPrimary,
-              // ),
               cursorColor: themeContext.colorScheme.onPrimary
             ),
           ),

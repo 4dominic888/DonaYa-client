@@ -21,7 +21,6 @@ class _OnboardingDots extends StatelessWidget {
               duration: Duration(milliseconds: 500),
               curve: Curves.ease,
             );
-            // safeSetState(() {});
           },
           effect: SlideEffect(
             spacing: 8,

@@ -26,7 +26,6 @@ class _RegisterViewState extends State<RegisterView> {
   final _surnameFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  // final _phoneFocusNode = FocusNode();
   final _birthdateFocusNode = FocusNode();
 
   @override
