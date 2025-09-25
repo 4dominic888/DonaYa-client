@@ -18,7 +18,9 @@ class NameInput extends FormzInput<String, NameValidationError> {
 
   @override
   NameValidationError? validator(String value) {
+    value = value.trim();
     if (value.isEmpty) return NameValidationError.empty;
+    if (value.length < 2) return NameValidationError.tooShort;
     if (!_regex.hasMatch(value)) return NameValidationError.invalid;
     return null;
   }
@@ -30,7 +32,9 @@ class SurnameInput extends FormzInput<String, NameValidationError> {
 
   @override
   NameValidationError? validator(String value) {
+    value = value.trim();
     if (value.isEmpty) return NameValidationError.empty;
+    if (value.length < 2) return NameValidationError.tooShort;
     if (!_regex.hasMatch(value)) return NameValidationError.invalid;
     return null;
   }
